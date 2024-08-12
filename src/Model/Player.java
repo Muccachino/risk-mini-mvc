@@ -1,18 +1,26 @@
 package Model;
 
+import java.awt.*;
+
 public class Player {
     private String name;
     private int soldiers;
     private int cards;
+    private Color playerColor;
 
-    public Player(String name) {
+    public Player(String name, Color playerColor) {
         this.name = name;
         this.soldiers = 20;
         this.cards = 0;
+        this.playerColor = playerColor;
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public Color getPlayerColor() {
+        return this.playerColor;
     }
 
     public int getSoldiers() {

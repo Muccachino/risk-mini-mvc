@@ -33,8 +33,8 @@ public class BoardController {
 
     public BoardController(String boardChoice) {
         this.boardChoice = boardChoice;
-        this.playerOne = new Player("Player One");
-        this.playerTwo = new Player("Player Two");
+        this.playerOne = new Player("Player One", Color.YELLOW);
+        this.playerTwo = new Player("Player Two", Color.PINK);
         this.currentPlayer = playerOne;
     }
 
@@ -117,20 +117,21 @@ public class BoardController {
             this.playerOne.removeSoldiers(1);
             country.addSoldiersInside(1);
             view.setSoldierLabel("Soldiers: " + country.getSoldiersInside());
-            view.setBackgroundColor(Color.YELLOW);
+            view.setBackgroundColor(this.playerOne.getPlayerColor());
             turn = turn.equals("Player One's Turn") ? "Player Two's Turn" : "Player One's Turn";
-            boardView.setPlayerTurnLabel(turn);
             this.currentPlayer = this.currentPlayer == this.playerOne ? this.playerTwo : this.playerOne;
+            boardView.setPlayerTurnLabel(turn);
+
 
         } else if (turn.equals("Player Two's Turn") && (country.getSoldiersInside() == 0 || allCountriesFilled())) {
             country.setOwner(this.playerTwo);
             this.playerTwo.removeSoldiers(1);
             country.addSoldiersInside(1);
             view.setSoldierLabel("Soldiers: " + country.getSoldiersInside());
-            view.setBackgroundColor(Color.PINK);
+            view.setBackgroundColor(this.playerTwo.getPlayerColor());
             turn = turn.equals("Player One's Turn") ? "Player Two's Turn" : "Player One's Turn";
-            boardView.setPlayerTurnLabel(turn);
             this.currentPlayer = this.currentPlayer == this.playerOne ? this.playerTwo : this.playerOne;
+            boardView.setPlayerTurnLabel(turn);
 
         }
 
@@ -152,9 +153,9 @@ public class BoardController {
             this.fightController.setAttackingCountry(null);
             this.fightController.setAttackingCountryView(null);
             if (this.currentPlayer == this.playerOne) {
-                view.setBackgroundColor(Color.YELLOW);
+                view.setBackgroundColor(this.playerOne.getPlayerColor());
             } else {
-                view.setBackgroundColor(Color.PINK);
+                view.setBackgroundColor(this.playerTwo.getPlayerColor());
             }
             boardView.attackButton.setEnabled(false);
         } else if (this.fightController.getAttackingCountry() != null &&
@@ -169,9 +170,9 @@ public class BoardController {
             this.fightController.setDefendingCountry(null);
             this.fightController.setDefendingCountryView(null);
             if (this.currentPlayer == this.playerOne) {
-                view.setBackgroundColor(Color.PINK);
+                view.setBackgroundColor(this.playerTwo.getPlayerColor());
             } else {
-                view.setBackgroundColor(Color.YELLOW);
+                view.setBackgroundColor(this.playerOne.getPlayerColor());
             }
             boardView.attackButton.setEnabled(false);
         }
@@ -227,9 +228,9 @@ public class BoardController {
             this.sendArmyController.setSendingCountry(null);
             this.sendArmyController.setSendingCountryView(null);
             if (this.currentPlayer == this.playerOne) {
-                view.setBackgroundColor(Color.YELLOW);
+                view.setBackgroundColor(this.playerOne.getPlayerColor());
             } else {
-                view.setBackgroundColor(Color.PINK);
+                view.setBackgroundColor(this.playerTwo.getPlayerColor());
             }
         } else if (this.sendArmyController.getReceivingCountry() == null &&
                 this.sendArmyController.getSendingCountry() != null &&

@@ -51,8 +51,7 @@ public class BoardView extends JFrame implements ActionListener {
         // Top row of game board
         playerTurn = new JLabel("INSERT TURN", JLabel.CENTER);
         playerTurn.setOpaque(true);
-        playerTurn.setBackground(Color.BLUE);
-        playerTurn.setForeground(Color.WHITE);
+        playerTurn.setBackground(boardController.getCurrentPlayer().getPlayerColor());
 
         currentPhase = new JLabel("INSERT PHASE", JLabel.CENTER);
         currentPhase.setOpaque(true);
@@ -120,6 +119,7 @@ public class BoardView extends JFrame implements ActionListener {
 
     public void setPlayerTurnLabel(String text) {
         playerTurn.setText(text);
+        playerTurn.setBackground(boardController.getCurrentPlayer().getPlayerColor());
     }
 
     public void setCurrentPhaseLabel(String text) {
@@ -137,6 +137,7 @@ public class BoardView extends JFrame implements ActionListener {
     public void setPlayerTwoCardsButtonText(String text) {
         playerTwoCards.setText(text);
     }
+
 
 
 
