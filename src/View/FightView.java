@@ -11,7 +11,8 @@ import java.awt.event.ActionListener;
 public class FightView implements ActionListener {
     public static final int ATTACK_WIDTH = 300;
     public static final int ATTACK_HEIGHT = 300;
-    public static final int DICE_HEIGHT = 150;
+    public static final int DICE_HEIGHT = 80;
+    public static final int LOSSES_HEIGHT = 80;
     public static final int BUTTON_HEIGHT = 50;
     GridBagLayout fightLayout = new GridBagLayout();
     GridBagConstraints fightConstraints = new GridBagConstraints();
@@ -24,6 +25,8 @@ public class FightView implements ActionListener {
     JLabel d_defenders;
     JLabel attackerDice;
     JLabel defenderDice;
+    JLabel attackerLosses;
+    JLabel defenderLosses;
 
     FightController controller;
     BoardView parent;
@@ -38,14 +41,14 @@ public class FightView implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
 
-        fightLayout.rowHeights = new int[] {ATTACK_HEIGHT, DICE_HEIGHT, BUTTON_HEIGHT};
+        fightLayout.rowHeights = new int[] {ATTACK_HEIGHT, DICE_HEIGHT, LOSSES_HEIGHT, BUTTON_HEIGHT};
         fightLayout.columnWidths = new int[] {ATTACK_WIDTH, ATTACK_WIDTH};
 
         JPanel attackingPanel = new JPanel(new GridLayout(4,1));
         attackingPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        JLabel a_countryName = new JLabel("Country: " + controller.getAttackingCountry().getName());
-        a_soldiers = new JLabel("Soldiers in Country: " + controller.getAttackingCountry().getSoldiersInside());
-        a_attackers = new JLabel("Attackers: 0");
+        JLabel a_countryName = new JLabel("Country: " + controller.getAttackingCountry().getName(), JLabel.CENTER);
+        a_soldiers = new JLabel("Soldiers in Country: " + controller.getAttackingCountry().getSoldiersInside(), JLabel.CENTER);
+        a_attackers = new JLabel("Attackers: 0", JLabel.CENTER);
         JPanel a_buttons = new JPanel();
         JButton a_one = new JButton("One");
         a_one.addActionListener(this);
@@ -66,9 +69,9 @@ public class FightView implements ActionListener {
 
         JPanel defendingPanel = new JPanel(new GridLayout(4,1));
         defendingPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        JLabel d_countryName = new JLabel("Country: " + controller.getDefendingCountry().getName());
-        d_soldiers = new JLabel("Soldiers in Country: " + controller.getDefendingCountry().getSoldiersInside());
-        d_defenders = new JLabel("Defenders: 0");
+        JLabel d_countryName = new JLabel("Country: " + controller.getDefendingCountry().getName(), JLabel.CENTER);
+        d_soldiers = new JLabel("Soldiers in Country: " + controller.getDefendingCountry().getSoldiersInside(), JLabel.CENTER);
+        d_defenders = new JLabel("Defenders: 0", JLabel.CENTER);
         JPanel d_buttons = new JPanel();
         JButton d_one = new JButton("One");
         d_one.addActionListener(this);
@@ -93,6 +96,13 @@ public class FightView implements ActionListener {
         defenderDice = new JLabel("Defender Roll:");
         d_dicePanel.add(defenderDice);
 
+        JPanel lossesPanel = new JPanel(new GridLayout(1,2));
+        lossesPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        attackerLosses = new JLabel("", JLabel.CENTER);
+        defenderLosses = new JLabel("", JLabel.CENTER);
+        lossesPanel.add(attackerLosses);
+        lossesPanel.add(defenderLosses);
+
         JPanel buttonPanel = new JPanel();
         JButton rollDice = new JButton("Roll Dice");
         rollDice.addActionListener(this);
@@ -107,7 +117,8 @@ public class FightView implements ActionListener {
         fightPanel.add(defendingPanel, Helper.buildBoardConstraints(fightConstraints, 0,1,1,1));
         fightPanel.add(a_dicePanel, Helper.buildBoardConstraints(fightConstraints,1,0,1,1));
         fightPanel.add(d_dicePanel, Helper.buildBoardConstraints(fightConstraints,1,1,1,1));
-        fightPanel.add(buttonPanel, Helper.buildBoardConstraints(fightConstraints,2,0,1,2));
+        fightPanel.add(lossesPanel, Helper.buildBoardConstraints(fightConstraints, 2, 0,1, 2));
+        fightPanel.add(buttonPanel, Helper.buildBoardConstraints(fightConstraints,3,0,1,2));
 
         frame.setContentPane(fightPanel);
         frame.pack();
@@ -121,7 +132,7 @@ public class FightView implements ActionListener {
         a_attackers.setText(text);
     }
     public void setDefendingCountrySoldiersLabel(String text) {
-        d_defenders.setText(text);
+        d_soldiers.setText(text);
     }
     public void setDefendersLabel(String text) {
         d_defenders.setText(text);
@@ -132,6 +143,8 @@ public class FightView implements ActionListener {
     public void setDefenderDiceLabel(String text) {
         defenderDice.setText(text);
     }
+    public void setAttackerLosses(String text) { attackerLosses.setText(text); }
+    public void setDefenderLosses(String text) { defenderLosses.setText(text); }
 
 
     @Override

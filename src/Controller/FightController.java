@@ -115,6 +115,9 @@ public class FightController {
 
         view.setAttackingCountrySoldiersLabel("Soldiers in Country: " + attackingCountry.getSoldiersInside());
         view.setDefendingCountrySoldiersLabel("Soldiers in Country: " + defendingCountry.getSoldiersInside());
+
+        view.setAttackerLosses("Attacker loses: " + attackerLosses + " Soldier(s)");
+        view.setDefenderLosses("Defender loses: " + defenderLosses + " Soldier(s)");
     }
 
     // Updates the state of the countries after an attack
