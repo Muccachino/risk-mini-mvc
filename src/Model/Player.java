@@ -8,7 +8,7 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.soldiers = 20;
-        this.cards = 3;
+        this.cards = 0;
     }
 
     public String getName() {

@@ -138,5 +138,7 @@ public class FightController {
 
         boardController.checkIfTooManyCards();
 
+        attackingCountry = null;
+        defendingCountry = null;
     }
 }

@@ -48,6 +48,7 @@ public class BoardController {
 
         this.fightController = new FightController(this, boardView);
         this.sendArmyController = new SendArmyController(this, boardView);
+
     }
     
     public void setCountryNeighbors(String boardChoice) {
@@ -168,9 +169,9 @@ public class BoardController {
             this.fightController.setDefendingCountry(null);
             this.fightController.setDefendingCountryView(null);
             if (this.currentPlayer == this.playerOne) {
-                view.setBackgroundColor(Color.YELLOW);
-            } else {
                 view.setBackgroundColor(Color.PINK);
+            } else {
+                view.setBackgroundColor(Color.YELLOW);
             }
             boardView.attackButton.setEnabled(false);
         }
@@ -222,7 +223,7 @@ public class BoardController {
             this.sendArmyController.setSendingCountry(country);
             this.sendArmyController.setSendingCountryView(view);
             view.setBackgroundColor(Color.MAGENTA);
-        } else if (this.sendArmyController.getSendingCountry().getName().equals(country.getName())) {
+        } else if (this.sendArmyController.getSendingCountry() != null && this.sendArmyController.getSendingCountry().getName().equals(country.getName())) {
             this.sendArmyController.setSendingCountry(null);
             this.sendArmyController.setSendingCountryView(null);
             if (this.currentPlayer == this.playerOne) {
@@ -231,6 +232,7 @@ public class BoardController {
                 view.setBackgroundColor(Color.PINK);
             }
         } else if (this.sendArmyController.getReceivingCountry() == null &&
+                this.sendArmyController.getSendingCountry() != null &&
                 checkIfNeighbor(this.sendArmyController.getSendingCountry().getName(), country.getName()) &&
                 this.sendArmyController.getSendingCountry().getOwner() == country.getOwner()) {
             this.sendArmyController.setReceivingCountry(country);

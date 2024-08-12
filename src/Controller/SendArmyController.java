@@ -55,7 +55,7 @@ public class SendArmyController {
     }
 
     public void sendArmy(int soldiers) {
-        this.sendingCountry.setSoldiersInside(soldiers);
+        sendingCountry.setSoldiersSend(soldiers);
         fortifyCountry();
     }
 
@@ -83,6 +83,12 @@ public class SendArmyController {
         receivingCountry.addSoldiersInside(sendingCountry.getSoldiersSend());
         sendingCountry.removeSoldiersInside(sendingCountry.getSoldiersSend());
         sendingCountry.resetSoldiersSend();
+
+
+        System.out.println(sendingCountry.getName());
+        System.out.println(sendingCountryView.country.getName());
+        System.out.println(receivingCountry.getName());
+        System.out.println(receivingCountryView.country.getName());
 
         sendingCountryView.updateCountryPanel();
         receivingCountryView.updateCountryPanel();
