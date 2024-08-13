@@ -62,6 +62,7 @@ public class FightController {
         new FightView(boardView, this).createFightWindow();
     }
 
+
     public boolean checkEnoughAttackers(int attackers) {
         return (attackingCountry.getSoldiersInside() - attackers) >= 1;
     }

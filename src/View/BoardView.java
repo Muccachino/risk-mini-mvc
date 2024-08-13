@@ -61,7 +61,7 @@ public class BoardView extends JFrame implements ActionListener {
         endTurnButton.setActionCommand("End Phase");
         endTurnButton.setEnabled(false);
 
-        // Game Board creation depending on choice in Start Window
+        // Country and continent creation depending on choice in Start Window
         JPanel allContinents = new JPanel();
         ContinentCreator continentCreator = new ContinentCreator(boardController);
         switch (boardChoice) {
@@ -100,6 +100,7 @@ public class BoardView extends JFrame implements ActionListener {
         attackButton.addActionListener(this);
         attackButton.setActionCommand("fight");
         attackButton.setEnabled(false);
+
 
         boardPanel.add(playerTurn, Helper.buildBoardConstraints(boardConstraints,0,0,1,1));
         boardPanel.add(currentPhase, Helper.buildBoardConstraints(boardConstraints,0,1,1,1));

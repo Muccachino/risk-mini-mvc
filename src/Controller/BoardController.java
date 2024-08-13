@@ -24,8 +24,8 @@ public class BoardController {
     Map<String, String[]> countryNeighbors = new HashMap<>();
 
     private final String boardChoice;
-    private Player playerOne;
-    private Player playerTwo;
+    private final Player playerOne;
+    private final Player playerTwo;
     private Player currentPlayer;
     public FightController fightController;
     private SendArmyController sendArmyController;
@@ -71,7 +71,7 @@ public class BoardController {
         return this.playerTwo;
     }
 
-    // Depending on the board sets the countries which are attackable from each country
+    // Depending on the board, sets the all other countries which a country can attack or send soldiers to
     public void setCountryNeighbors(String boardChoice) {
         switch (boardChoice) {
             case "board1" -> NeighborRelation.addCountryNeighbors1(countryNeighbors);
@@ -113,6 +113,7 @@ public class BoardController {
         return neighborCheck;
     }
 
+    // Logic for the first phase, where both players choose and fill their starting countries
     public void placeSoldiers(Country country, CountryView view) {
         if(turn.equals(this.playerOne.getName() + "'s Turn") && (country.getSoldiersInside() == 0 || allCountriesFilled())){
             country.setOwner(this.playerOne);
@@ -147,7 +148,7 @@ public class BoardController {
         }
     }
 
-    // Setting / Unsetting an attacking and defending country for the Attack Phase
+    // Setting or Unsetting an attacking and defending country for the Attack Phase
     public void attackPhase(Country country, CountryView view) {
         if(this.fightController.getAttackingCountry() == null && country.getOwner() == this.currentPlayer && country.getSoldiersInside() > 1) {
             this.fightController.setAttackingCountry(country);
@@ -182,6 +183,7 @@ public class BoardController {
         }
     }
 
+    // Start the extra phase for each player after they clicked their card button with 3 or more cards
     public void playerOneSetCardsPhase() {
         this.playerOne.cardsToSoldiers();
         boardView.setPlayerOneCardsButtonText(this.playerOne.getName() + " Cards: " + this.playerOne.getCards());
@@ -198,6 +200,7 @@ public class BoardController {
         boardView.setCurrentPhaseLabel(this.playerTwo.getName() + ": Set " + this.playerOne.getSoldiers() + " Soldier(s)");
     }
 
+    // Logic for the extra phase, after the card button click
     public void playerOneSetCardTroops(Country country, CountryView view) {
         this.playerOne.removeSoldiers(1);
         country.addSoldiersInside(1);
@@ -308,6 +311,25 @@ public class BoardController {
         }
     }
 
+    // Calculates the new Troops at the beginning of a turn, depending on owned countries and continents
+    public void getNewTroops(Player player) {
+        int newTroops = 0;
+        int countriesOwned = 0;
+        int continentsOwned = checkOwningContinents(player);
+
+        for (Country c : allCountries.values()) {
+            if(c.getOwner() == player) countriesOwned++;
+        }
+        if((countriesOwned / 3) < 3) {
+            newTroops += 3;
+        } else {
+            newTroops += (int)Math.floor(countriesOwned / 3);
+        }
+        newTroops += continentsOwned * 3;
+
+        player.addSoldiers(newTroops);
+    }
+
     public int checkOwningContinents(Player player) {
         int continentsOwned = 0;
         int contA = 0;
@@ -338,24 +360,6 @@ public class BoardController {
         return continentsOwned;
     }
 
-    // Calculates the new Troops at the beginning of a turn, depending on owned countries and continents
-    public void getNewTroops(Player player) {
-        int newTroops = 0;
-        int countriesOwned = 0;
-        int continentsOwned = checkOwningContinents(player);
-
-        for (Country c : allCountries.values()) {
-            if(c.getOwner() == player) countriesOwned++;
-        }
-        if((countriesOwned / 3) < 3) {
-            newTroops += 3;
-        } else {
-            newTroops += (int)Math.floor(countriesOwned / 3);
-        }
-        newTroops += continentsOwned * 3;
-
-        player.addSoldiers(newTroops);
-    }
 
     public void endTurn() {
         this.currentPlayer = this.currentPlayer == this.playerOne ? this.playerTwo : this.playerOne;

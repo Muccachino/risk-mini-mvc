@@ -4,6 +4,7 @@ import java.awt.*;
 
 public class Helper {
 
+    // Constraints builder for every GridBagLayout
     public static GridBagConstraints buildBoardConstraints(GridBagConstraints constraints, int row, int col, int rowspan, int colspan) {
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridy = row;

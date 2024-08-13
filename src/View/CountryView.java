@@ -51,6 +51,7 @@ public class CountryView implements MouseListener {
         return countryPanel;
     }
 
+    // Updates the country after fights and fortifications
     public void updateCountryPanel() {
         setSoldierLabel("Soldiers: " + country.getSoldiersInside());
         if(country.getOwner() == boardController.getPlayerOne()) {

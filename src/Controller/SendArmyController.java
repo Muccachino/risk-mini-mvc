@@ -62,17 +62,10 @@ public class SendArmyController {
         sendingCountry.removeSoldiersInside(sendingCountry.getSoldiersSend());
         sendingCountry.resetSoldiersSend();
 
-
-
-        System.out.println(sendingCountry.getName());
-        System.out.println(sendingCountryView.country.getName());
-        System.out.println(receivingCountry.getName());
-        System.out.println(receivingCountryView.country.getName());
-
         sendingCountryView.updateCountryPanel();
         receivingCountryView.updateCountryPanel();
 
-        // After the set amount of sending, the players turn end automatically
+        // After the set amount of fortifications, the players turn end automatically
         fortifications--;
         if(fortifications == 0) {
             boardController.endTurn();

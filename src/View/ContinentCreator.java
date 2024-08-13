@@ -22,6 +22,8 @@ public class ContinentCreator {
         this.controller = controller;
     }
 
+    // Different from the other creators, since the countries here are placed with a standard GridLayout instead of
+    // more complex GridBagLayout
     public JPanel createContinent1(String continentName, Map<String, Country> allCountries, Map<String, CountryView> allCountryViews) {
         JPanel continent = new JPanel(new GridLayout(2, 3));
 
@@ -43,6 +45,25 @@ public class ContinentCreator {
 
         return continent;
     }
+
+    //TODO: Universal Continent Creator
+/*    String[] allCountryNames = new String[] {"A1", "A2", "A3", "A4", "A5", "A6",
+                                            "B1", "B2", "B3", "B4", "B5", "B6",
+                                            "C1", "C2", "C3", "C4", "C5", "C6",
+                                            "D1", "D2", "D3", "D4", "D5", "D6"};
+
+    Color[] allContinentColors = new Color[] {new Color(249,225,68),
+                                            new Color(241,115,115),
+                                            new Color(99,189,89),
+                                            new Color(67,80,156),};
+
+    int[][] allCountryPlacements = new int[][] {
+            new int[] {0,0,1,1},
+    };
+
+    public JPanel createWholeContinent(String[] countryNames, Color[] continentColors, int[][] countryPlacements ) {
+
+    };*/
 
     public JPanel createContinents2(Map<String, Country> allCountries, Map<String, CountryView> allCountryViews) {
         
