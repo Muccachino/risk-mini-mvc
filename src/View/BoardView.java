@@ -86,13 +86,13 @@ public class BoardView extends JFrame implements ActionListener {
         allContinents.setBackground(new Color(153,204,255));
 
         // Bottom row of game board
-        playerOneCards = new JButton("Player One Cards: 0" );
+        playerOneCards = new JButton(this.boardController.getPlayerOne().getName() + " Cards: 0" );
         playerOneCards.setBackground(Color.ORANGE);
         playerOneCards.setOpaque(true);
         playerOneCards.addActionListener(this);
         playerOneCards.setActionCommand("playerOneCards");
 
-        playerTwoCards = new JButton("Player Two Cards: 0");
+        playerTwoCards = new JButton(this.boardController.getPlayerTwo().getName() + " Cards: 0");
         playerTwoCards.setOpaque(true);
         playerTwoCards.setBackground(Color.ORANGE);
         playerTwoCards.addActionListener(this);

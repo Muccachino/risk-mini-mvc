@@ -15,7 +15,7 @@ public class BoardController {
 
     BoardView boardView;
 
-    String turn = "Player One's Turn";
+    String turn;
     String phase = "Set Soldiers";
     String lastPhase;
 
@@ -31,24 +31,25 @@ public class BoardController {
     private SendArmyController sendArmyController;
 
 
-    public BoardController(String boardChoice) {
+    public BoardController(String boardChoice, String playerOneName, String playerTwoName,
+                           Color playerOneColor, Color playerTwoColor) {
         this.boardChoice = boardChoice;
-        this.playerOne = new Player("Player One", Color.YELLOW);
-        this.playerTwo = new Player("Player Two", Color.PINK);
+        this.playerOne = new Player(playerOneName, playerOneColor);
+        this.playerTwo = new Player(playerTwoName, playerTwoColor);
         this.currentPlayer = playerOne;
     }
 
     public void createBoardView() {
         boardView = new BoardView(this.boardChoice, allCountries, this, allCountryViews);
         boardView.setVisible(true);
-        boardView.setPlayerTurnLabel(turn);
         boardView.setCurrentPhaseLabel(phase);
+        turn = this.playerOne.getName() + "'s Turn";
+        boardView.setPlayerTurnLabel(turn);
 
         setCountryNeighbors(boardChoice);
 
         this.fightController = new FightController(this, boardView);
         this.sendArmyController = new SendArmyController(this, boardView);
-
     }
     
     public void setCountryNeighbors(String boardChoice) {
@@ -112,24 +113,26 @@ public class BoardController {
     }
 
     public void placeSoldiers(Country country, CountryView view) {
-        if(turn.equals("Player One's Turn") && (country.getSoldiersInside() == 0 || allCountriesFilled())){
+        if(turn.equals(this.playerOne.getName() + "'s Turn") && (country.getSoldiersInside() == 0 || allCountriesFilled())){
             country.setOwner(this.playerOne);
             this.playerOne.removeSoldiers(1);
             country.addSoldiersInside(1);
             view.setSoldierLabel("Soldiers: " + country.getSoldiersInside());
             view.setBackgroundColor(this.playerOne.getPlayerColor());
-            turn = turn.equals("Player One's Turn") ? "Player Two's Turn" : "Player One's Turn";
+            view.setSoldierIcons(country.getSoldiersInside());
+            turn = turn.equals(this.playerOne.getName() + "'s Turn") ? this.playerTwo.getName() + "'s Turn" : this.playerOne.getName() + "'s Turn";
             this.currentPlayer = this.currentPlayer == this.playerOne ? this.playerTwo : this.playerOne;
             boardView.setPlayerTurnLabel(turn);
 
 
-        } else if (turn.equals("Player Two's Turn") && (country.getSoldiersInside() == 0 || allCountriesFilled())) {
+        } else if (turn.equals(this.playerTwo.getName() + "'s Turn") && (country.getSoldiersInside() == 0 || allCountriesFilled())) {
             country.setOwner(this.playerTwo);
             this.playerTwo.removeSoldiers(1);
             country.addSoldiersInside(1);
             view.setSoldierLabel("Soldiers: " + country.getSoldiersInside());
             view.setBackgroundColor(this.playerTwo.getPlayerColor());
-            turn = turn.equals("Player One's Turn") ? "Player Two's Turn" : "Player One's Turn";
+            view.setSoldierIcons(country.getSoldiersInside());
+            turn = turn.equals(this.playerOne.getName() + "'s Turn") ? this.playerTwo.getName() + "'s Turn" : this.playerOne.getName() + "'s Turn";
             this.currentPlayer = this.currentPlayer == this.playerOne ? this.playerTwo : this.playerOne;
             boardView.setPlayerTurnLabel(turn);
 
@@ -180,29 +183,30 @@ public class BoardController {
 
     public void playerOneSetCardsPhase() {
         this.playerOne.cardsToSoldiers();
-        boardView.setPlayerOneCardsButtonText("Player One Cards: " + this.playerOne.getCards());
+        boardView.setPlayerOneCardsButtonText(this.playerOne.getName() + " Cards: " + this.playerOne.getCards());
         lastPhase = phase;
-        phase = "Player One: Set Soldiers";
-        boardView.setCurrentPhaseLabel("Player One: Set " + this.playerOne.getSoldiers() + " Soldier(s)");
+        phase = this.playerOne.getName() + ": Set Soldiers";
+        boardView.setCurrentPhaseLabel(this.playerOne.getName() + ": Set " + this.playerOne.getSoldiers() + " Soldier(s)");
     }
 
     public void playerTwoSetCardsPhase() {
         this.playerTwo.cardsToSoldiers();
-        boardView.setPlayerTwoCardsButtonText("Player Two Cards: " + this.playerTwo.getCards());
+        boardView.setPlayerTwoCardsButtonText(this.playerTwo.getName() + " Cards: " + this.playerTwo.getCards());
         lastPhase = phase;
-        phase = "Player Two: Set Soldiers";
-        boardView.setCurrentPhaseLabel("Player Two: Set " + this.playerOne.getSoldiers() + " Soldier(s)");
+        phase = this.playerTwo.getName() + ": Set Soldiers";
+        boardView.setCurrentPhaseLabel(this.playerTwo.getName() + ": Set " + this.playerOne.getSoldiers() + " Soldier(s)");
     }
 
     public void playerOneSetCardTroops(Country country, CountryView view) {
         this.playerOne.removeSoldiers(1);
         country.addSoldiersInside(1);
         view.setSoldierLabel("Soldiers: " + country.getSoldiersInside());
+        view.setSoldierIcons(country.getSoldiersInside());
         if(this.playerOne.getSoldiers() == 0) {
             phase = lastPhase;
             boardView.setCurrentPhaseLabel(phase);
         } else {
-            boardView.setCurrentPhaseLabel("Player One: Set " + this.playerOne.getSoldiers() + " Soldier(s)");
+            boardView.setCurrentPhaseLabel(this.playerOne.getName() + ": Set " + this.playerOne.getSoldiers() + " Soldier(s)");
         }
     }
 
@@ -210,11 +214,12 @@ public class BoardController {
         this.playerTwo.removeSoldiers(1);
         country.addSoldiersInside(1);
         view.setSoldierLabel("Soldiers: " + country.getSoldiersInside());
+        view.setSoldierIcons(country.getSoldiersInside());
         if(this.playerTwo.getSoldiers() == 0) {
             phase = lastPhase;
             boardView.setCurrentPhaseLabel(phase);
         } else {
-            boardView.setCurrentPhaseLabel("Player Two: Set " + this.playerTwo.getSoldiers() + " Soldier(s)");
+            boardView.setCurrentPhaseLabel(this.playerTwo.getName() + ": Set " + this.playerTwo.getSoldiers() + " Soldier(s)");
         }
     }
 
@@ -248,6 +253,7 @@ public class BoardController {
             country.addSoldiersInside(1);
             this.currentPlayer.removeSoldiers(1);
             view.setSoldierLabel("Soldiers: " + country.getSoldiersInside());
+            view.setSoldierIcons(country.getSoldiersInside());
             boardView.setCurrentPhaseLabel(phase + " " + this.currentPlayer.getName() + " " + this.currentPlayer.getSoldiers() + " Soldier(s)");
 
             if(this.currentPlayer == this.playerOne && this.playerOne.getSoldiers() == 0 && this.playerTwo.getSoldiers() != 0) {
@@ -288,15 +294,15 @@ public class BoardController {
         if (this.currentPlayer.getCards() > 5) {
             if (this.currentPlayer == this.playerOne) {
                 this.playerOne.cardsToSoldiers();
-                boardView.setPlayerOneCardsButtonText("Player One Cards: " + this.playerOne.getCards());
-                phase = "Player One: Set Soldiers";
-                boardView.setCurrentPhaseLabel("Player One: Set " + this.playerOne.getSoldiers() + " Soldier(s)");
+                boardView.setPlayerOneCardsButtonText(this.playerOne.getName() + " Cards: " + this.playerOne.getCards());
+                phase = this.playerOne.getName() + ": Set Soldiers";
+                boardView.setCurrentPhaseLabel(this.playerOne.getName() + ": Set " + this.playerOne.getSoldiers() + " Soldier(s)");
             }
             if (this.currentPlayer == this.playerTwo) {
                 this.playerTwo.cardsToSoldiers();
-                boardView.setPlayerTwoCardsButtonText("Player Two Cards: " + this.playerTwo.getCards());
-                phase = "Player Two: Set Soldiers";
-                boardView.setCurrentPhaseLabel("Player Two: Set " + this.playerTwo.getSoldiers() + " Soldier(s)");
+                boardView.setPlayerTwoCardsButtonText(this.playerTwo.getName() + " Cards: " + this.playerTwo.getCards());
+                phase = this.playerTwo.getName() + ": Set Soldiers";
+                boardView.setCurrentPhaseLabel(this.playerTwo.getName() + ": Set " + this.playerTwo.getSoldiers() + " Soldier(s)");
             }
         }
     }

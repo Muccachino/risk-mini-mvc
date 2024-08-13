@@ -25,7 +25,6 @@ public class ContinentCreator {
     public JPanel createContinent1(String continentName, Map<String, Country> allCountries, Map<String, CountryView> allCountryViews) {
         JPanel continent = new JPanel(new GridLayout(2, 3));
 
-        
         for (int i = 1; i <= 6; i++) {
             Country c = new Country(continentName + i, continentName);
             allCountries.put(c.getName(), c);

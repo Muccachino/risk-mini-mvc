@@ -129,8 +129,8 @@ public class FightController {
             attackingCountry.setSoldiersInside(1);
 
             boardController.getCurrentPlayer().addCards(1);
-            boardView.setPlayerOneCardsButtonText("Player One Cards: " + boardController.getPlayerOne().getCards());
-            boardView.setPlayerTwoCardsButtonText("Player Two Cards: " + boardController.getPlayerTwo().getCards());
+            boardView.setPlayerOneCardsButtonText(boardController.getPlayerOne().getName() + " Cards: " + boardController.getPlayerOne().getCards());
+            boardView.setPlayerTwoCardsButtonText(boardController.getPlayerTwo().getName() + " Cards: " + boardController.getPlayerTwo().getCards());
         }
 
         // Colors of countries will be set to their owners color

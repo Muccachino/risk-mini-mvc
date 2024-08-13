@@ -2,6 +2,7 @@ package View;
 
 import Controller.BoardController;
 import Model.Country;
+import Model.Helper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,10 +10,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class CountryView implements MouseListener {
-    JPanel countryPanel;
+
     JLabel soldierLabel;
     JLabel soldierIconLabel;
     ImageIcon soldierIcon = new ImageIcon(System.getProperty("user.dir") + "\\src\\View\\soldier_icon.png");
+
+    GridBagLayout countryLayout = new GridBagLayout();
+    GridBagConstraints countryConstraints = new GridBagConstraints();
+    JPanel countryPanel = new JPanel(countryLayout);
 
     public BoardController boardController;
     public Country country;
@@ -23,18 +28,21 @@ public class CountryView implements MouseListener {
     }
 
     public JPanel createCountry(Color borderColor, String countryName) {
-        countryPanel = new JPanel(new GridLayout(3,1));
-        countryPanel.add(new JLabel(countryName, JLabel.CENTER));
+        countryLayout.rowHeights = new int[] {20,20,60};
+        countryLayout.columnWidths = new int[] {100};
+
+        //countryPanel = new JPanel(new GridLayout(3,1));
+        countryPanel.add(new JLabel(countryName, JLabel.CENTER), Helper.buildBoardConstraints(countryConstraints, 0,0,1,1));
 
         soldierLabel = new JLabel("Soldiers: 0");
         soldierLabel.setHorizontalAlignment(SwingConstants.CENTER);
         soldierLabel.setVerticalAlignment(SwingConstants.TOP);
-        countryPanel.add(soldierLabel);
+        countryPanel.add(soldierLabel, Helper.buildBoardConstraints(countryConstraints, 1,0,1,1));
 
         soldierIconLabel = new JLabel();
         soldierIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
         soldierIconLabel.setVerticalAlignment(SwingConstants.TOP);
-        countryPanel.add(soldierIconLabel);
+        countryPanel.add(soldierIconLabel, Helper.buildBoardConstraints(countryConstraints, 2,0,2,1));
 
         countryPanel.setBorder(BorderFactory.createLineBorder(borderColor, 3));
         countryPanel.setOpaque(true);
@@ -50,6 +58,8 @@ public class CountryView implements MouseListener {
         } else {
             setBackgroundColor(boardController.getPlayerTwo().getPlayerColor());
         }
+
+        setSoldierIcons(country.getSoldiersInside());
     }
 
     public void setSoldierLabel(String text) {
@@ -64,7 +74,7 @@ public class CountryView implements MouseListener {
             JLabel icon = new JLabel(soldierIcon);
             soldierIconLabel.add(icon);
         }
-        countryPanel.add(soldierIconLabel);
+        countryPanel.add(soldierIconLabel, Helper.buildBoardConstraints(countryConstraints, 2, 0, 2, 1));
     }
 
     public void setBackgroundColor(Color color) {
@@ -96,10 +106,10 @@ public class CountryView implements MouseListener {
             else if(boardController.getPhase().equals("Attack Phase")){
                 boardController.attackPhase(country, this);
             }
-            else if (boardController.getPhase().equals("Player One: Set Soldiers") && country.getOwner() == boardController.getPlayerOne()) {
+            else if (boardController.getPhase().equals(boardController.getPlayerOne().getName() + ": Set Soldiers") && country.getOwner() == boardController.getPlayerOne()) {
                 boardController.playerOneSetCardTroops(country, this);
             }
-            else if (boardController.getPhase().equals("Player Two: Set Soldiers") && country.getOwner() == boardController.getPlayerTwo()) {
+            else if (boardController.getPhase().equals(boardController.getPlayerTwo().getName() + ": Set Soldiers") && country.getOwner() == boardController.getPlayerTwo()) {
                 boardController.playerTwoSetCardTroops(country, this);
             }
             else if (boardController.getPhase().equals("Fortification Phase")) {
