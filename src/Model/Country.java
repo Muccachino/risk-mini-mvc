@@ -1,10 +1,10 @@
 package Model;
 
 public class Country {
-    private String name;
+    private final String name;
     private int soldiersInside;
     private Player owner;
-    private String continent;
+    private final String continent;
     private int soldiersSend;
 
     public Country(String name, String continent) {

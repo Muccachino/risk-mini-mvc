@@ -22,8 +22,8 @@ public class SendArmyView implements ActionListener {
     JButton sendButton;
     JButton cancelButton;
 
-    private SendArmyController controller;
-    private BoardView parent;
+    private final SendArmyController controller;
+    private final BoardView parent;
 
     public SendArmyView(SendArmyController controller, BoardView parent) {
         this.controller = controller;

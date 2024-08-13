@@ -19,8 +19,8 @@ public class FightController {
 
     int attackingSoldiers;
     int defendingSoldiers;
-    private BoardController boardController;
-    private BoardView boardView;
+    private final BoardController boardController;
+    private final BoardView boardView;
 
     public FightController(BoardController boardController, BoardView boardView) {
         this.boardController = boardController;

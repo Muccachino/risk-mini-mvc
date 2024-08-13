@@ -5,9 +5,6 @@ import View.BoardView;
 import View.CountryView;
 import View.SendArmyView;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class SendArmyController {
     Country sendingCountry;
     CountryView sendingCountryView;
@@ -17,8 +14,8 @@ public class SendArmyController {
 
     int fortifications = 3;
 
-    private BoardController boardController;
-    private BoardView boardView;
+    private final BoardController boardController;
+    private final BoardView boardView;
 
     public SendArmyController(BoardController boardController, BoardView boardView) {
         this.boardController = boardController;

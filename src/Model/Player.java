@@ -3,10 +3,10 @@ package Model;
 import java.awt.*;
 
 public class Player {
-    private String name;
+    private final String name;
     private int soldiers;
     private int cards;
-    private Color playerColor;
+    private final Color playerColor;
 
     public Player(String name, Color playerColor) {
         this.name = name;

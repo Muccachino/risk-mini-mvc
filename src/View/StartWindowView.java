@@ -4,7 +4,6 @@ import Controller.StartWindowController;
 import Model.Helper;
 
 import javax.swing.*;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +11,8 @@ import java.awt.event.ActionListener;
 public class StartWindowView implements ActionListener {
     public static final int HEADLINE_HEIGHT = 50;
     public static final int NAME_HEIGHT = 150;
-    public static final int BOARDCHOICE_HEIGHT = 150;
-    public static final int PLAYERNAME_WIDTH = 250;
+    public static final int BOARD_CHOICE_HEIGHT = 150;
+    public static final int PLAYER_NAME_WIDTH = 250;
 
 
     JFrame frame;
@@ -35,7 +34,7 @@ public class StartWindowView implements ActionListener {
     GridBagConstraints startWindowConstraints = new GridBagConstraints();
     JPanel startWindowPanel = new JPanel(startWindowLayout);
 
-    private StartWindowController controller;
+    private final StartWindowController controller;
 
     public StartWindowView(StartWindowController controller) {
         this.controller = controller;
@@ -47,8 +46,8 @@ public class StartWindowView implements ActionListener {
         frame.setSize(400,400);
         frame.setResizable(false);
 
-        startWindowLayout.rowHeights = new int[] { HEADLINE_HEIGHT, NAME_HEIGHT, BOARDCHOICE_HEIGHT};
-        startWindowLayout.columnWidths = new int[] { PLAYERNAME_WIDTH, PLAYERNAME_WIDTH};
+        startWindowLayout.rowHeights = new int[] { HEADLINE_HEIGHT, NAME_HEIGHT, BOARD_CHOICE_HEIGHT};
+        startWindowLayout.columnWidths = new int[] { PLAYER_NAME_WIDTH, PLAYER_NAME_WIDTH};
 
         JLabel headline = new JLabel("Risk", JLabel.CENTER);
         headline.setFont(new Font(headline.getFont().getName(), Font.PLAIN, 20));

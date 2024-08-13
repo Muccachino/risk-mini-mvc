@@ -31,14 +31,12 @@ public class BoardView extends JFrame implements ActionListener {
     GridBagConstraints boardConstraints = new GridBagConstraints();
     JPanel boardPanel = new JPanel(boardLayout);
 
-    private String boardChoice;
     public Map<String, Country> allCountries;
     public BoardController boardController;
     public Map<String, CountryView> allCountryViews;
 
     public BoardView(String boardChoice, Map<String, Country> allCountries, BoardController boardController, Map<String, CountryView> allCountryViews) {
         super("Risk");
-        this.boardChoice = boardChoice;
         this.allCountries = allCountries;
         this.boardController = boardController;
         this.allCountryViews = allCountryViews;
@@ -49,11 +47,11 @@ public class BoardView extends JFrame implements ActionListener {
         boardLayout.rowHeights = new int[] {DICE_ROW_HEIGHT, FIELD_HEIGHT, STAT_ROW_HEIGHT};
 
         // Top row of game board
-        playerTurn = new JLabel("INSERT TURN", JLabel.CENTER);
+        playerTurn = new JLabel("Player Turn", JLabel.CENTER);
         playerTurn.setOpaque(true);
         playerTurn.setBackground(boardController.getCurrentPlayer().getPlayerColor());
 
-        currentPhase = new JLabel("INSERT PHASE", JLabel.CENTER);
+        currentPhase = new JLabel("Current Phase", JLabel.CENTER);
         currentPhase.setOpaque(true);
         currentPhase.setBackground(Color.WHITE);
 
@@ -66,7 +64,7 @@ public class BoardView extends JFrame implements ActionListener {
         // Game Board creation depending on choice in Start Window
         JPanel allContinents = new JPanel();
         ContinentCreator continentCreator = new ContinentCreator(boardController);
-        switch (this.boardChoice) {
+        switch (boardChoice) {
             case "board1" -> {
 
                 allContinents = new JPanel(new GridLayout(2, 2));

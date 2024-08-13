@@ -11,7 +11,7 @@ public class Helper {
         constraints.gridwidth = colspan;
         constraints.gridheight = rowspan;
         return constraints;
-    };
+    }
 
     // Converts all dice values to a string for the output label
     public static String setLabelContent(Integer[] rolls) {
