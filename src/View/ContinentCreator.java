@@ -1,14 +1,14 @@
 package View;
 import Controller.BoardController;
 import Model.Country;
-import Model.CountryCoordinates;
+import Config.CountryCoordinates;
 
 import javax.swing.*;
 import java.awt.*;
 
 import java.util.Map;
 
-import static Model.Helper.buildBoardConstraints;
+import static Config.Helper.buildBoardConstraints;
 import static java.awt.Component.CENTER_ALIGNMENT;
 
 public class ContinentCreator {

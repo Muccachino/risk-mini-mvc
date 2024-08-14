@@ -1,7 +1,7 @@
 package View;
 
 import Controller.BoardController;
-import Model.Helper;
+import Config.Helper;
 import Model.Country;
 
 import javax.swing.*;

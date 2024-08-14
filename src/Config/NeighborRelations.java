@@ -1,8 +1,8 @@
-package Model;
+package Config;
 
 import java.util.Map;
 
-public class NeighborRelation {
+public class NeighborRelations {
 
     public static void addCountryNeighbors1(Map<String, String[]> countryNeighbors) {
         countryNeighbors.put("A1", new String[] {"A2", "A4"});

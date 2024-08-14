@@ -1,7 +1,7 @@
 package View;
 
 import Controller.FightController;
-import Model.Helper;
+import Config.Helper;
 
 import javax.swing.*;
 import java.awt.*;

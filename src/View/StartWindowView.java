@@ -1,7 +1,7 @@
 package View;
 
 import Controller.StartWindowController;
-import Model.Helper;
+import Config.Helper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,6 @@ public class StartWindowView implements ActionListener {
     public static final int NAME_HEIGHT = 150;
     public static final int BOARD_CHOICE_HEIGHT = 150;
     public static final int PLAYER_NAME_WIDTH = 250;
-
 
     JFrame frame;
 

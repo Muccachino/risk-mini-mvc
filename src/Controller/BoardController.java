@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Country;
-import Model.NeighborRelation;
+import Config.NeighborRelations;
 import Model.Player;
 import View.BoardView;
 import View.CountryView;
@@ -76,9 +76,9 @@ public class BoardController {
     // Depending on the board, sets the all other countries which a country can attack or send soldiers to
     public void setCountryNeighbors(String boardChoice) {
         switch (boardChoice) {
-            case "board1" -> NeighborRelation.addCountryNeighbors1(countryNeighbors);
-            case "board2" -> NeighborRelation.addCountryNeighbors2(countryNeighbors);
-            case "board3" -> NeighborRelation.addCountryNeighbors3(countryNeighbors);
+            case "board1" -> NeighborRelations.addCountryNeighbors1(countryNeighbors);
+            case "board2" -> NeighborRelations.addCountryNeighbors2(countryNeighbors);
+            case "board3" -> NeighborRelations.addCountryNeighbors3(countryNeighbors);
         }
     }
 

@@ -1,6 +1,6 @@
 package View;
 
-import Model.Helper;
+import Config.Helper;
 import Controller.SendArmyController;
 
 import javax.swing.*;

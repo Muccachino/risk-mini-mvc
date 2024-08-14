@@ -2,7 +2,7 @@ package View;
 
 import Controller.BoardController;
 import Model.Country;
-import Model.Helper;
+import Config.Helper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class CountryView implements MouseListener {
 
     JLabel soldierLabel;
     JLabel soldierIconLabel;
-    ImageIcon soldierIcon = new ImageIcon(System.getProperty("user.dir") + "\\src\\View\\soldier_icon.png");
+    ImageIcon soldierIcon = new ImageIcon(System.getProperty("user.dir") + "\\src\\Images\\soldier_icon.png");
 
     GridBagLayout countryLayout = new GridBagLayout();
     GridBagConstraints countryConstraints = new GridBagConstraints();

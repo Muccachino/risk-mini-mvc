@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Country;
-import Model.Helper;
+import Config.Helper;
 import View.BoardView;
 import View.CountryView;
 import View.FightView;

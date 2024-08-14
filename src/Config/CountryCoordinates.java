@@ -1,4 +1,4 @@
-package Model;
+package Config;
 
 public class CountryCoordinates {
     public static int[][] allCountryPlacements2 = new int[][] {
