@@ -40,6 +40,8 @@ public class BoardController {
     }
 
     public void createBoardView() {
+        System.out.println(this.playerOne.getPlayerColor());
+        System.out.println(this.playerTwo.getPlayerColor());
         boardView = new BoardView(this.boardChoice, allCountries, this, allCountryViews);
         boardView.setVisible(true);
         boardView.setCurrentPhaseLabel(getPhase());

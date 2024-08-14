@@ -180,7 +180,8 @@ public class StartWindowView implements ActionListener {
             controller.colorsSet() &&
             controller.boardChosen() &&
             !playerOneName.getText().isBlank() &&
-            !playerTwoName.getText().isBlank()) {
+            !playerTwoName.getText().isBlank() &&
+            !playerOneName.getText().equals(playerTwoName.getText())) {
 
             controller.startGame(playerOneName.getText(), playerTwoName.getText());
         }

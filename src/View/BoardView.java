@@ -68,18 +68,18 @@ public class BoardView extends JFrame implements ActionListener {
             case "board1" -> {
 
                 allContinents = new JPanel(new GridLayout(2, 2));
-                JPanel continentOne = continentCreator.createContinent1("A", this.allCountries, this.allCountryViews);
-                JPanel continentTwo = continentCreator.createContinent1("B", this.allCountries, this.allCountryViews);
-                JPanel continentThree = continentCreator.createContinent1("C", this.allCountries, this.allCountryViews);
-                JPanel continentFour = continentCreator.createContinent1("D", this.allCountries, this.allCountryViews);
+                JPanel continentOne = continentCreator.createBoard1("A", this.allCountries, this.allCountryViews);
+                JPanel continentTwo = continentCreator.createBoard1("B", this.allCountries, this.allCountryViews);
+                JPanel continentThree = continentCreator.createBoard1("C", this.allCountries, this.allCountryViews);
+                JPanel continentFour = continentCreator.createBoard1("D", this.allCountries, this.allCountryViews);
 
                 allContinents.add(continentOne);
                 allContinents.add(continentTwo);
                 allContinents.add(continentThree);
                 allContinents.add(continentFour);
             }
-            case "board2" -> allContinents = continentCreator.createContinents2(this.allCountries, this.allCountryViews);
-            case "board3" -> allContinents = continentCreator.createContinents3(this.allCountries, this.allCountryViews);
+            case "board2" -> allContinents = continentCreator.createBoard2(this.allCountries, this.allCountryViews);
+            case "board3" -> allContinents = continentCreator.createBoard3(this.allCountries, this.allCountryViews);
         }
         allContinents.setBackground(new Color(153,204,255));
 
