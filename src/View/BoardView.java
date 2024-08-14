@@ -114,6 +114,7 @@ public class BoardView extends JFrame implements ActionListener {
         setContentPane(boardPanel);
 
         pack();
+        setLocationRelativeTo(null);
     }
 
     public void setPlayerTurnLabel(String text) {

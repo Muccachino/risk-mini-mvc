@@ -115,6 +115,7 @@ public class StartWindowView implements ActionListener {
 
         frame.setContentPane(startWindowPanel);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         return frame;

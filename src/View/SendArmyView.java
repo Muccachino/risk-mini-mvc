@@ -61,6 +61,7 @@ public class SendArmyView implements ActionListener {
 
         dialog.setContentPane(sendPanel);
         dialog.pack();
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
 

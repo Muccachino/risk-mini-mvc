@@ -122,6 +122,7 @@ public class FightView implements ActionListener {
 
         frame.setContentPane(fightPanel);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

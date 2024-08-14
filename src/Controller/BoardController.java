@@ -231,7 +231,9 @@ public class BoardController {
 
     // Setting / Unsetting a sending and receiving country and opening the Send Armies Window
     public void fortificationPhase(Country country, CountryView view) {
-        if(this.sendArmyController.getSendingCountry() == null && country.getSoldiersInside() > 1) {
+        if(this.sendArmyController.getSendingCountry() == null &&
+                country.getSoldiersInside() > 1 &&
+                country.getOwner() == this.currentPlayer) {
             this.sendArmyController.setSendingCountry(country);
             this.sendArmyController.setSendingCountryView(view);
             view.setBackgroundColor(Color.MAGENTA);
