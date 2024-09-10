@@ -68,7 +68,6 @@ public class SendArmyView implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("send")) {
-            System.out.println((int)soldiersSend.getValue());
             controller.sendArmy((int)soldiersSend.getValue());
             dialog.dispose();
         }

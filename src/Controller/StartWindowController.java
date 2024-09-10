@@ -10,7 +10,10 @@ public class StartWindowController {
 
     Color playerOneColor;
     Color playerTwoColor;
+    Color playerThreeColor;
+    Color playerFourColor;
     String boardChoice;
+    int numOfPlayers = 2;
 
     public void setPlayerOneColor(Color color) {
         playerOneColor = color;
@@ -18,8 +21,17 @@ public class StartWindowController {
     public void setPlayerTwoColor(Color color) {
         playerTwoColor = color;
     }
+    public void setPlayerThreeColor(Color color) {
+        playerThreeColor = color;
+    }
+    public void setPlayerFourColor(Color color) {
+        playerFourColor = color;
+    }
     public void setBoardChoice(String choice) {
         boardChoice = choice;
+    }
+    public void setNumOfPlayers(int num) {
+        numOfPlayers = num;
     }
     public boolean boardChosen() {
         return boardChoice != null;
@@ -32,8 +44,9 @@ public class StartWindowController {
         startWindowFrame = new StartWindowView(this).drawStartWindowFrame();
     }
 
-    public void startGame(String playerOneName, String playerTwoName) {
-        BoardController board = new BoardController(boardChoice, playerOneName, playerTwoName, playerOneColor, playerTwoColor);
+    public void startGame(String playerOneName, String playerTwoName, String playerThreeName, String playerFourName, boolean missionsEnabled) {
+        BoardController board = new BoardController(boardChoice, numOfPlayers, playerOneName, playerTwoName, playerThreeName, playerFourName,
+                                                    playerOneColor, playerTwoColor, playerThreeColor, playerFourColor, missionsEnabled);
         board.createBoardView();
 
         startWindowFrame.dispose();

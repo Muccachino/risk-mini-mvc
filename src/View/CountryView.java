@@ -3,6 +3,7 @@ package View;
 import Controller.BoardController;
 import Model.Country;
 import Config.Helper;
+import Model.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,8 +56,15 @@ public class CountryView implements MouseListener {
         setSoldierLabel("Soldiers: " + country.getSoldiersInside());
         if(country.getOwner() == boardController.getPlayerOne()) {
             setBackgroundColor(boardController.getPlayerOne().getPlayerColor());
-        } else {
+        }
+        if(country.getOwner() == boardController.getPlayerTwo()) {
             setBackgroundColor(boardController.getPlayerTwo().getPlayerColor());
+        }
+        if(country.getOwner() == boardController.getPlayerThree()) {
+            setBackgroundColor(boardController.getPlayerThree().getPlayerColor());
+        }
+        if(country.getOwner() == boardController.getPlayerFour()) {
+            setBackgroundColor(boardController.getPlayerFour().getPlayerColor());
         }
 
         setSoldierIcons(country.getSoldiersInside());
@@ -107,10 +115,16 @@ public class CountryView implements MouseListener {
                 boardController.attackPhase(country, this);
             }
             else if (boardController.getPhase().equals(boardController.getPlayerOne().getName() + ": Set Soldiers") && country.getOwner() == boardController.getPlayerOne()) {
-                boardController.playerOneSetCardTroops(country, this);
+                boardController.playerSetCardTroops(country, this, boardController.getPlayerOne());
             }
             else if (boardController.getPhase().equals(boardController.getPlayerTwo().getName() + ": Set Soldiers") && country.getOwner() == boardController.getPlayerTwo()) {
-                boardController.playerTwoSetCardTroops(country, this);
+                boardController.playerSetCardTroops(country, this, boardController.getPlayerTwo());
+            }
+            else if (boardController.getPhase().equals(boardController.getPlayerThree().getName() + ": Set Soldiers") && country.getOwner() == boardController.getPlayerThree()) {
+                boardController.playerSetCardTroops(country, this, boardController.getPlayerThree());
+            }
+            else if (boardController.getPhase().equals(boardController.getPlayerFour().getName() + ": Set Soldiers") && country.getOwner() == boardController.getPlayerFour()) {
+                boardController.playerSetCardTroops(country, this, boardController.getPlayerFour());
             }
             else if (boardController.getPhase().equals("Fortification Phase")) {
                 boardController.fortificationPhase(country, this);
@@ -127,17 +141,14 @@ public class CountryView implements MouseListener {
             boardController.showHideNeighbors(country.getName(), true);
         }
     }
-
     @Override
     public void mouseReleased(MouseEvent e) {
         if(SwingUtilities.isRightMouseButton(e)){
             boardController.showHideNeighbors(country.getName(), false);
         }
     }
-
     @Override
     public void mouseEntered(MouseEvent e) {}
-
     @Override
     public void mouseExited(MouseEvent e) {}
 }

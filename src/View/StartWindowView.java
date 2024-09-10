@@ -7,24 +7,37 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 
 public class StartWindowView implements ActionListener {
     public static final int HEADLINE_HEIGHT = 50;
+    public static final int NUM_OF_PLAYER_HEIGHT = 25;
+    public static final int MISSION_HEIGHT = 25;
     public static final int NAME_HEIGHT = 150;
     public static final int BOARD_CHOICE_HEIGHT = 150;
     public static final int PLAYER_NAME_WIDTH = 250;
 
     JFrame frame;
 
+    JCheckBox missionCheck;
     JTextField playerOneName;
     JTextField playerTwoName;
+    JTextField playerThreeName;
+    JTextField playerFourName;
     JButton playerOneColorButton1;
     JButton playerOneColorButton2;
     JButton playerOneColorButton3;
     JButton playerTwoColorButton1;
     JButton playerTwoColorButton2;
     JButton playerTwoColorButton3;
+    JButton playerThreeColorButton1;
+    JButton playerThreeColorButton2;
+    JButton playerThreeColorButton3;
+    JButton playerFourColorButton1;
+    JButton playerFourColorButton2;
+    JButton playerFourColorButton3;
 
+    //TODO: Button und Farben in Listen packen und so die Farben zuweisen
     JButton board1;
     JButton board2;
     JButton board3;
@@ -45,12 +58,40 @@ public class StartWindowView implements ActionListener {
         frame.setSize(400,400);
         frame.setResizable(false);
 
-        startWindowLayout.rowHeights = new int[] { HEADLINE_HEIGHT, NAME_HEIGHT, BOARD_CHOICE_HEIGHT};
+        startWindowLayout.rowHeights = new int[] { HEADLINE_HEIGHT, NUM_OF_PLAYER_HEIGHT, MISSION_HEIGHT, NAME_HEIGHT, NAME_HEIGHT, BOARD_CHOICE_HEIGHT};
         startWindowLayout.columnWidths = new int[] { PLAYER_NAME_WIDTH, PLAYER_NAME_WIDTH};
+
+        startWindowPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
         JLabel headline = new JLabel("Risk", JLabel.CENTER);
         headline.setFont(new Font(headline.getFont().getName(), Font.PLAIN, 20));
 
+        JPanel playerNumberPanel = new JPanel(new GridLayout(1,2));
+        JLabel playerQuestion = new JLabel("How many Players:", JLabel.CENTER);
+        ButtonGroup playerNumberGroup = new ButtonGroup();
+        JRadioButton twoPlayers = new JRadioButton("Two", true);
+        twoPlayers.addActionListener(this);
+        twoPlayers.setActionCommand("twoPlayers");
+        JRadioButton threePlayers = new JRadioButton("Three");
+        threePlayers.addActionListener(this);
+        threePlayers.setActionCommand("threePlayers");
+        JRadioButton fourPlayers = new JRadioButton("Four");
+        fourPlayers.addActionListener(this);
+        fourPlayers.setActionCommand("fourPlayers");
+        playerNumberGroup.add(twoPlayers);
+        playerNumberGroup.add(threePlayers);
+        playerNumberGroup.add(fourPlayers);
+        playerNumberPanel.add(playerQuestion);
+        playerNumberPanel.add(twoPlayers);
+        playerNumberPanel.add(threePlayers);
+        playerNumberPanel.add(fourPlayers);
+
+        JPanel missionPanel = new JPanel(new GridLayout(1,2));
+        JLabel missionQuestion = new JLabel("Missions?", JLabel.CENTER);
+        missionCheck = new JCheckBox("", false);
+        missionCheck.addItemListener(e -> missionCheck.setSelected(e.getStateChange() == ItemEvent.SELECTED));
+        missionPanel.add(missionQuestion);
+        missionPanel.add(missionCheck);
 
         JPanel playerOnePanel = new JPanel(new GridLayout(4, 1));
         playerOnePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -88,6 +129,44 @@ public class StartWindowView implements ActionListener {
         playerTwoPanel.add(playerTwoColorHeadline);
         playerTwoPanel.add(playerTwoColorButtonPanel);
 
+        JPanel playerThreePanel = new JPanel(new GridLayout(4, 1));
+        playerThreePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JLabel playerThreeHeadline = new JLabel("Player Three Name: ", JLabel.CENTER);
+        playerThreeName = new JTextField();
+        playerThreeName.setEnabled(false);
+        JLabel playerThreeColorHeadline = new JLabel("Choose Player Three Color: ", JLabel.CENTER);
+        JPanel playerThreeColorButtonPanel = new JPanel(new GridLayout(1, 3));
+        playerThreeColorButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,10,2,10));
+        playerThreeColorButton1 = createButton("", new Color(106, 11, 222), "playerThreeColorButton1");
+        playerThreeColorButton2 = createButton("", new Color(224, 221, 2), "playerThreeColorButton2");
+        playerThreeColorButton3 = createButton("", new Color(97, 96, 49), "playerThreeColorButton3");
+        playerThreeColorButtonPanel.add(playerThreeColorButton1);
+        playerThreeColorButtonPanel.add(playerThreeColorButton2);
+        playerThreeColorButtonPanel.add(playerThreeColorButton3);
+        playerThreePanel.add(playerThreeHeadline);
+        playerThreePanel.add(playerThreeName);
+        playerThreePanel.add(playerThreeColorHeadline);
+        playerThreePanel.add(playerThreeColorButtonPanel);
+
+        JPanel playerFourPanel = new JPanel(new GridLayout(4, 1));
+        playerFourPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JLabel playerFourHeadline = new JLabel("Player Four Name: ", JLabel.CENTER);
+        playerFourName = new JTextField();
+        playerFourName.setEnabled(false);
+        JLabel playerFourColorHeadline = new JLabel("Choose Player Four Color: ", JLabel.CENTER);
+        JPanel playerFourColorButtonPanel = new JPanel(new GridLayout(1, 3));
+        playerFourColorButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,10,2,10));
+        playerFourColorButton1 = createButton("", new Color(225, 99, 128), "playerFourColorButton1");
+        playerFourColorButton2 = createButton("", new Color(99, 224, 170), "playerFourColorButton2");
+        playerFourColorButton3 = createButton("", new Color(108, 139, 113), "playerFourColorButton3");
+        playerFourColorButtonPanel.add(playerFourColorButton1);
+        playerFourColorButtonPanel.add(playerFourColorButton2);
+        playerFourColorButtonPanel.add(playerFourColorButton3);
+        playerFourPanel.add(playerFourHeadline);
+        playerFourPanel.add(playerFourName);
+        playerFourPanel.add(playerFourColorHeadline);
+        playerFourPanel.add(playerFourColorButtonPanel);
+
 
         JPanel boardChoicePanel = new JPanel(new GridLayout(3, 1));
         JLabel choice = new JLabel("Choose a game board:", JLabel.CENTER);
@@ -108,9 +187,13 @@ public class StartWindowView implements ActionListener {
         boardChoicePanel.add(startButton);
 
         startWindowPanel.add(headline, Helper.buildBoardConstraints(startWindowConstraints, 0, 0, 1, 2));
-        startWindowPanel.add(playerOnePanel, Helper.buildBoardConstraints(startWindowConstraints, 1, 0, 1, 1));
-        startWindowPanel.add(playerTwoPanel, Helper.buildBoardConstraints(startWindowConstraints, 1, 1, 1, 1));
-        startWindowPanel.add(boardChoicePanel, Helper.buildBoardConstraints(startWindowConstraints, 2, 0, 1, 2));
+        startWindowPanel.add(playerNumberPanel, Helper.buildBoardConstraints(startWindowConstraints, 1,0,1,2));
+        startWindowPanel.add(missionPanel, Helper.buildBoardConstraints(startWindowConstraints, 2,0,1,1));
+        startWindowPanel.add(playerOnePanel, Helper.buildBoardConstraints(startWindowConstraints, 3, 0, 1, 1));
+        startWindowPanel.add(playerTwoPanel, Helper.buildBoardConstraints(startWindowConstraints, 3, 1, 1, 1));
+        startWindowPanel.add(playerThreePanel, Helper.buildBoardConstraints(startWindowConstraints, 4, 0, 1, 1));
+        startWindowPanel.add(playerFourPanel, Helper.buildBoardConstraints(startWindowConstraints, 4, 1, 1, 1));
+        startWindowPanel.add(boardChoicePanel, Helper.buildBoardConstraints(startWindowConstraints, 5, 0, 1, 2));
 
         frame.setContentPane(startWindowPanel);
         frame.pack();
@@ -139,51 +222,91 @@ public class StartWindowView implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("playerOneColorButton1")) {
-            highlightButton(playerOneColorButton1, playerOneColorButton2, playerOneColorButton3);
-            controller.setPlayerOneColor(playerOneColorButton1.getBackground());
-        }
-        if (e.getActionCommand().equals("playerOneColorButton2")) {
-            highlightButton(playerOneColorButton2, playerOneColorButton1, playerOneColorButton3);
-            controller.setPlayerOneColor(playerOneColorButton2.getBackground());
-        }
-        if (e.getActionCommand().equals("playerOneColorButton3")) {
-            highlightButton(playerOneColorButton3, playerOneColorButton1, playerOneColorButton2);
-            controller.setPlayerOneColor(playerOneColorButton3.getBackground());
-        }
-        if (e.getActionCommand().equals("playerTwoColorButton1")) {
-            highlightButton(playerTwoColorButton1, playerTwoColorButton2, playerTwoColorButton3);
-            controller.setPlayerTwoColor(playerTwoColorButton1.getBackground());
-        }
-        if (e.getActionCommand().equals("playerTwoColorButton2")) {
-            highlightButton(playerTwoColorButton2, playerTwoColorButton1, playerTwoColorButton3);
-            controller.setPlayerTwoColor(playerTwoColorButton2.getBackground());
-        }
-        if (e.getActionCommand().equals("playerTwoColorButton3")) {
-            highlightButton(playerTwoColorButton3, playerTwoColorButton1, playerTwoColorButton2);
-            controller.setPlayerTwoColor(playerTwoColorButton3.getBackground());
-        }
+        switch (e.getActionCommand()){
+            case "twoPlayers":
+                controller.setNumOfPlayers(2);
+                playerThreeName.setEnabled(false);
+                playerFourName.setEnabled(false);
+                break;
+            case "threePlayers":
+                controller.setNumOfPlayers(3);
+                playerThreeName.setEnabled(true);
+                playerFourName.setEnabled(false);
+                break;
+            case "fourPlayers":
+                controller.setNumOfPlayers(4);
+                playerThreeName.setEnabled(true);
+                playerFourName.setEnabled(true);
+                break;
+            case "playerOneColorButton1":
+                highlightButton(playerOneColorButton1, playerOneColorButton2, playerOneColorButton3);
+                controller.setPlayerOneColor(playerOneColorButton1.getBackground());
+                break;
+            case "playerOneColorButton2":
+                highlightButton(playerOneColorButton2, playerOneColorButton1, playerOneColorButton3);
+                controller.setPlayerOneColor(playerOneColorButton2.getBackground());
+                break;
+            case "playerOneColorButton3":
+                highlightButton(playerOneColorButton3, playerOneColorButton1, playerOneColorButton2);
+                controller.setPlayerOneColor(playerOneColorButton3.getBackground());
+                break;
+            case "playerTwoColorButton1":
+                highlightButton(playerTwoColorButton1, playerTwoColorButton2, playerTwoColorButton3);
+                controller.setPlayerTwoColor(playerTwoColorButton1.getBackground());
+                break;
+            case "playerTwoColorButton2":
+                highlightButton(playerTwoColorButton2, playerTwoColorButton1, playerTwoColorButton3);
+                controller.setPlayerTwoColor(playerTwoColorButton2.getBackground());
+                break;
+            case "playerTwoColorButton3":
+                highlightButton(playerTwoColorButton3, playerTwoColorButton1, playerTwoColorButton2);
+                controller.setPlayerTwoColor(playerTwoColorButton3.getBackground());
+                break;
+            case "playerThreeColorButton1":
+                highlightButton(playerThreeColorButton1, playerThreeColorButton2, playerThreeColorButton3);
+                controller.setPlayerThreeColor(playerThreeColorButton1.getBackground());
+                break;
+            case "playerThreeColorButton2":
+                highlightButton(playerThreeColorButton2, playerThreeColorButton1, playerThreeColorButton3);
+                controller.setPlayerThreeColor(playerThreeColorButton2.getBackground());
+                break;
+            case "playerThreeColorButton3":
+                highlightButton(playerThreeColorButton3, playerThreeColorButton1, playerThreeColorButton2);
+                controller.setPlayerThreeColor(playerThreeColorButton3.getBackground());
+                break;
+            case "playerFourColorButton1":
+                highlightButton(playerFourColorButton1, playerFourColorButton2, playerFourColorButton3);
+                controller.setPlayerFourColor(playerFourColorButton1.getBackground());
+                break;
+            case "playerFourColorButton2":
+                highlightButton(playerFourColorButton2, playerFourColorButton1, playerFourColorButton3);
+                controller.setPlayerFourColor(playerFourColorButton2.getBackground());
+                break;
+            case "playerFourColorButton3":
+                highlightButton(playerFourColorButton3, playerFourColorButton1, playerFourColorButton2);
+                controller.setPlayerFourColor(playerFourColorButton3.getBackground());
+                break;
+            case "board1":
+                highlightButton(board1, board2, board3);
+                controller.setBoardChoice("board1");
+                break;
+            case "board2":
+                highlightButton(board2, board1, board3);
+                controller.setBoardChoice("board2");
+                break;
+            case "board3":
+                highlightButton(board3, board1, board2);
+                controller.setBoardChoice("board3");
+                break;
+            case "startButton":
+                if(controller.colorsSet() &&
+                    controller.boardChosen() &&
+                    !playerOneName.getText().isBlank() &&
+                    !playerTwoName.getText().isBlank() &&
+                    !playerOneName.getText().equals(playerTwoName.getText())) {
 
-        if (e.getActionCommand().equals("board1")) {
-            highlightButton(board1, board2, board3);
-            controller.setBoardChoice("board1");
-        }
-        if (e.getActionCommand().equals("board2")) {
-            highlightButton(board2, board1, board3);
-            controller.setBoardChoice("board2");
-        }
-        if (e.getActionCommand().equals("board3")) {
-            highlightButton(board3, board1, board2);
-            controller.setBoardChoice("board3");
-        }
-        if (e.getActionCommand().equals("startButton") &&
-            controller.colorsSet() &&
-            controller.boardChosen() &&
-            !playerOneName.getText().isBlank() &&
-            !playerTwoName.getText().isBlank() &&
-            !playerOneName.getText().equals(playerTwoName.getText())) {
-
-            controller.startGame(playerOneName.getText(), playerTwoName.getText());
+                    controller.startGame(playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(), playerFourName.getText(), missionCheck.isSelected());
+                }
         }
     }
 }
