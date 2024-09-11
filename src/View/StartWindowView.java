@@ -17,6 +17,35 @@ public class StartWindowView implements ActionListener {
     public static final int BOARD_CHOICE_HEIGHT = 150;
     public static final int PLAYER_NAME_WIDTH = 250;
 
+    Color[][] allPlayerColors = new Color[][]{
+            // Player One
+            new Color[]
+                    {
+                    new Color(61, 194, 87),
+                    new Color(60, 101, 195),
+                    new Color(197, 60, 58),
+            },
+            // Player Two
+            new Color[] {
+                    new Color(194, 61, 168),
+                    new Color(195, 154, 60),
+                    new Color(58, 195, 197),
+            },
+            // Player Three
+            new Color[] {
+                    new Color(106, 11, 222),
+                    new Color(224, 221, 2),
+                    new Color(97, 96, 49),
+            },
+            // Player Four
+            new Color[] {
+                    new Color(225, 99, 128),
+                    new Color(99, 224, 170),
+                    new Color(108, 139, 113)
+            }
+
+    };
+
     JFrame frame;
 
     JCheckBox missionCheck;
@@ -37,7 +66,6 @@ public class StartWindowView implements ActionListener {
     JButton playerFourColorButton2;
     JButton playerFourColorButton3;
 
-    //TODO: Button und Farben in Listen packen und so die Farben zuweisen
     JButton board1;
     JButton board2;
     JButton board3;
@@ -100,9 +128,9 @@ public class StartWindowView implements ActionListener {
         JLabel playerOneColorHeadline = new JLabel("Choose Player One Color: ", JLabel.CENTER);
         JPanel playerOneColorButtonPanel = new JPanel(new GridLayout(1, 3));
         playerOneColorButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,10,2,10));
-        playerOneColorButton1 = createButton("", new Color(61, 194, 87), "playerOneColorButton1");
-        playerOneColorButton2 = createButton("", new Color(60, 101, 195), "playerOneColorButton2");
-        playerOneColorButton3 = createButton("", new Color(197, 60, 58), "playerOneColorButton3");
+        playerOneColorButton1 = createButton("", allPlayerColors[0][0], "playerOneColorButton1");
+        playerOneColorButton2 = createButton("", allPlayerColors[0][1], "playerOneColorButton2");
+        playerOneColorButton3 = createButton("", allPlayerColors[0][2], "playerOneColorButton3");
         playerOneColorButtonPanel.add(playerOneColorButton1);
         playerOneColorButtonPanel.add(playerOneColorButton2);
         playerOneColorButtonPanel.add(playerOneColorButton3);
@@ -118,9 +146,9 @@ public class StartWindowView implements ActionListener {
         JLabel playerTwoColorHeadline = new JLabel("Choose Player Two Color: ", JLabel.CENTER);
         JPanel playerTwoColorButtonPanel = new JPanel(new GridLayout(1, 3));
         playerTwoColorButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,10,2,10));
-        playerTwoColorButton1 = createButton("", new Color(194, 61, 168), "playerTwoColorButton1");
-        playerTwoColorButton2 = createButton("", new Color(195, 154, 60), "playerTwoColorButton2");
-        playerTwoColorButton3 = createButton("", new Color(58, 195, 197), "playerTwoColorButton3");
+        playerTwoColorButton1 = createButton("", allPlayerColors[1][0], "playerTwoColorButton1");
+        playerTwoColorButton2 = createButton("", allPlayerColors[1][1], "playerTwoColorButton2");
+        playerTwoColorButton3 = createButton("", allPlayerColors[1][2], "playerTwoColorButton3");
         playerTwoColorButtonPanel.add(playerTwoColorButton1);
         playerTwoColorButtonPanel.add(playerTwoColorButton2);
         playerTwoColorButtonPanel.add(playerTwoColorButton3);
@@ -137,9 +165,9 @@ public class StartWindowView implements ActionListener {
         JLabel playerThreeColorHeadline = new JLabel("Choose Player Three Color: ", JLabel.CENTER);
         JPanel playerThreeColorButtonPanel = new JPanel(new GridLayout(1, 3));
         playerThreeColorButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,10,2,10));
-        playerThreeColorButton1 = createButton("", new Color(106, 11, 222), "playerThreeColorButton1");
-        playerThreeColorButton2 = createButton("", new Color(224, 221, 2), "playerThreeColorButton2");
-        playerThreeColorButton3 = createButton("", new Color(97, 96, 49), "playerThreeColorButton3");
+        playerThreeColorButton1 = createButton("", allPlayerColors[2][0], "playerThreeColorButton1");
+        playerThreeColorButton2 = createButton("", allPlayerColors[2][1], "playerThreeColorButton2");
+        playerThreeColorButton3 = createButton("", allPlayerColors[2][2], "playerThreeColorButton3");
         playerThreeColorButtonPanel.add(playerThreeColorButton1);
         playerThreeColorButtonPanel.add(playerThreeColorButton2);
         playerThreeColorButtonPanel.add(playerThreeColorButton3);
@@ -156,9 +184,9 @@ public class StartWindowView implements ActionListener {
         JLabel playerFourColorHeadline = new JLabel("Choose Player Four Color: ", JLabel.CENTER);
         JPanel playerFourColorButtonPanel = new JPanel(new GridLayout(1, 3));
         playerFourColorButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,10,2,10));
-        playerFourColorButton1 = createButton("", new Color(225, 99, 128), "playerFourColorButton1");
-        playerFourColorButton2 = createButton("", new Color(99, 224, 170), "playerFourColorButton2");
-        playerFourColorButton3 = createButton("", new Color(108, 139, 113), "playerFourColorButton3");
+        playerFourColorButton1 = createButton("", allPlayerColors[3][0], "playerFourColorButton1");
+        playerFourColorButton2 = createButton("", allPlayerColors[3][1], "playerFourColorButton2");
+        playerFourColorButton3 = createButton("", allPlayerColors[3][2], "playerFourColorButton3");
         playerFourColorButtonPanel.add(playerFourColorButton1);
         playerFourColorButtonPanel.add(playerFourColorButton2);
         playerFourColorButtonPanel.add(playerFourColorButton3);
@@ -213,6 +241,16 @@ public class StartWindowView implements ActionListener {
         return button;
     }
 
+    public void addButtonColors() {
+        JButton[] allColorButtons = new JButton[] {
+                playerOneColorButton1, playerOneColorButton2, playerOneColorButton3,
+                playerTwoColorButton1, playerTwoColorButton2, playerTwoColorButton3,
+                playerThreeColorButton1, playerThreeColorButton2, playerThreeColorButton3,
+                playerFourColorButton1, playerFourColorButton2, playerFourColorButton3};
+
+
+    }
+
     // Highlights the first Button in given Array
     public void highlightButton(JButton activeButton, JButton notActiveButton1, JButton notActiveButton2) {
         notActiveButton1.setBorder(BorderFactory.createLineBorder(new Color(228, 229, 227), 2));
@@ -240,51 +278,51 @@ public class StartWindowView implements ActionListener {
                 break;
             case "playerOneColorButton1":
                 highlightButton(playerOneColorButton1, playerOneColorButton2, playerOneColorButton3);
-                controller.setPlayerOneColor(playerOneColorButton1.getBackground());
+                controller.setPlayerOneColor(allPlayerColors[0][0]);
                 break;
             case "playerOneColorButton2":
                 highlightButton(playerOneColorButton2, playerOneColorButton1, playerOneColorButton3);
-                controller.setPlayerOneColor(playerOneColorButton2.getBackground());
+                controller.setPlayerOneColor(allPlayerColors[0][1]);
                 break;
             case "playerOneColorButton3":
                 highlightButton(playerOneColorButton3, playerOneColorButton1, playerOneColorButton2);
-                controller.setPlayerOneColor(playerOneColorButton3.getBackground());
+                controller.setPlayerOneColor(allPlayerColors[0][2]);
                 break;
             case "playerTwoColorButton1":
                 highlightButton(playerTwoColorButton1, playerTwoColorButton2, playerTwoColorButton3);
-                controller.setPlayerTwoColor(playerTwoColorButton1.getBackground());
+                controller.setPlayerTwoColor(allPlayerColors[1][0]);
                 break;
             case "playerTwoColorButton2":
                 highlightButton(playerTwoColorButton2, playerTwoColorButton1, playerTwoColorButton3);
-                controller.setPlayerTwoColor(playerTwoColorButton2.getBackground());
+                controller.setPlayerTwoColor(allPlayerColors[1][1]);
                 break;
             case "playerTwoColorButton3":
                 highlightButton(playerTwoColorButton3, playerTwoColorButton1, playerTwoColorButton2);
-                controller.setPlayerTwoColor(playerTwoColorButton3.getBackground());
+                controller.setPlayerTwoColor(allPlayerColors[1][2]);
                 break;
             case "playerThreeColorButton1":
                 highlightButton(playerThreeColorButton1, playerThreeColorButton2, playerThreeColorButton3);
-                controller.setPlayerThreeColor(playerThreeColorButton1.getBackground());
+                controller.setPlayerThreeColor(allPlayerColors[2][0]);
                 break;
             case "playerThreeColorButton2":
                 highlightButton(playerThreeColorButton2, playerThreeColorButton1, playerThreeColorButton3);
-                controller.setPlayerThreeColor(playerThreeColorButton2.getBackground());
+                controller.setPlayerThreeColor(allPlayerColors[2][1]);
                 break;
             case "playerThreeColorButton3":
                 highlightButton(playerThreeColorButton3, playerThreeColorButton1, playerThreeColorButton2);
-                controller.setPlayerThreeColor(playerThreeColorButton3.getBackground());
+                controller.setPlayerThreeColor(allPlayerColors[2][2]);
                 break;
             case "playerFourColorButton1":
                 highlightButton(playerFourColorButton1, playerFourColorButton2, playerFourColorButton3);
-                controller.setPlayerFourColor(playerFourColorButton1.getBackground());
+                controller.setPlayerFourColor(allPlayerColors[3][0]);
                 break;
             case "playerFourColorButton2":
                 highlightButton(playerFourColorButton2, playerFourColorButton1, playerFourColorButton3);
-                controller.setPlayerFourColor(playerFourColorButton2.getBackground());
+                controller.setPlayerFourColor(allPlayerColors[3][1]);
                 break;
             case "playerFourColorButton3":
                 highlightButton(playerFourColorButton3, playerFourColorButton1, playerFourColorButton2);
-                controller.setPlayerFourColor(playerFourColorButton3.getBackground());
+                controller.setPlayerFourColor(allPlayerColors[3][2]);
                 break;
             case "board1":
                 highlightButton(board1, board2, board3);
