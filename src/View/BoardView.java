@@ -145,6 +145,7 @@ public class BoardView extends JFrame implements ActionListener {
 
         pack();
         setLocationRelativeTo(null);
+        System.out.println(boardController.getCurrentPlayer().getAllCardsSize());
     }
 
     public void setPlayerTurnLabel(String text) {
@@ -188,8 +189,8 @@ public class BoardView extends JFrame implements ActionListener {
             e.getActionCommand().equals("playerOneCards") &&
             (boardController.getPhase().equals("Attack Phase") || boardController.getPhase().equals("Fortification Phase")))
         {
-            if(boardController.getPlayerOne().getCards() >= 3) {
-                boardController.playerOneSetCardsPhase();
+            if(boardController.getPlayerOne().getAllCardsSize() >= 3) {
+                boardController.cardWindowController.createCardWindowView();
             } else {
                 JOptionPane.showMessageDialog(this, "You need at least three cards!");
             }
@@ -198,8 +199,8 @@ public class BoardView extends JFrame implements ActionListener {
             e.getActionCommand().equals("playerTwoCards") &&
             (boardController.getPhase().equals("Attack Phase") || boardController.getPhase().equals("Fortification Phase")))
         {
-            if(boardController.getPlayerTwo().getCards() >= 3) {
-                boardController.playerTwoSetCardsPhase();
+            if(boardController.getPlayerTwo().getAllCardsSize() >= 3) {
+                boardController.cardWindowController.createCardWindowView();
             } else {
                 JOptionPane.showMessageDialog(this, "You need at least three cards!");
             }
@@ -208,8 +209,8 @@ public class BoardView extends JFrame implements ActionListener {
                 e.getActionCommand().equals("playerThreeCards") &&
                 (boardController.getPhase().equals("Attack Phase") || boardController.getPhase().equals("Fortification Phase")))
         {
-            if(boardController.getPlayerThree().getCards() >= 3) {
-                boardController.playerThreeSetCardsPhase();
+            if(boardController.getPlayerThree().getAllCardsSize() >= 3) {
+                boardController.cardWindowController.createCardWindowView();
             } else {
                 JOptionPane.showMessageDialog(this, "You need at least three cards!");
             }
@@ -218,8 +219,8 @@ public class BoardView extends JFrame implements ActionListener {
                 e.getActionCommand().equals("playerFourCards") &&
                 (boardController.getPhase().equals("Attack Phase") || boardController.getPhase().equals("Fortification Phase")))
         {
-            if(boardController.getPlayerFour().getCards() >= 3) {
-                boardController.playerFourSetCardsPhase();
+            if(boardController.getPlayerFour().getAllCardsSize() >= 3) {
+                boardController.cardWindowController.createCardWindowView();
             } else {
                 JOptionPane.showMessageDialog(this, "You need at least three cards!");
             }

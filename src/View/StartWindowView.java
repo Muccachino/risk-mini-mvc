@@ -337,14 +337,24 @@ public class StartWindowView implements ActionListener {
                 controller.setBoardChoice("board3");
                 break;
             case "startButton":
-                if(controller.colorsSet() &&
-                    controller.boardChosen() &&
-                    !playerOneName.getText().isBlank() &&
-                    !playerTwoName.getText().isBlank() &&
-                    !playerOneName.getText().equals(playerTwoName.getText())) {
-
-                    controller.startGame(playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(), playerFourName.getText(), missionCheck.isSelected());
+                if(!controller.playerNamesSet(playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(), playerFourName.getText())){
+                    JOptionPane.showMessageDialog(frame, "Please enter a name for every player!", "Start Game", JOptionPane.INFORMATION_MESSAGE);
+                    return;
                 }
+                if(!controller.colorsSet()) {
+                    JOptionPane.showMessageDialog(frame, "Please choose a color for every player!", "Start Game", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                if(!controller.boardChosen()) {
+                    JOptionPane.showMessageDialog(frame, "Please choose a board!", "Start Game", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                if(!controller.uniquePlayerNames(playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(), playerFourName.getText())){
+                    JOptionPane.showMessageDialog(frame, "Player names have to be unique!", "Start Game", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+                controller.startGame(playerOneName.getText(), playerTwoName.getText(), playerThreeName.getText(), playerFourName.getText(), missionCheck.isSelected());
         }
     }
 }

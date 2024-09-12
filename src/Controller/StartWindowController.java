@@ -4,6 +4,8 @@ import View.StartWindowView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class StartWindowController {
     JFrame startWindowFrame;
@@ -37,7 +39,30 @@ public class StartWindowController {
         return boardChoice != null;
     }
     public boolean colorsSet() {
-        return playerOneColor != null && playerTwoColor != null;
+        return switch (numOfPlayers) {
+            case 3 -> playerOneColor != null && playerTwoColor != null && playerThreeColor != null;
+            case 4 -> playerOneColor != null && playerTwoColor != null && playerThreeColor != null && playerFourColor != null;
+            default -> playerOneColor != null && playerTwoColor != null;
+        };
+    }
+    public boolean playerNamesSet(String playerOneName, String playerTwoName, String playerThreeName, String playerFourName) {
+        return switch (numOfPlayers) {
+            case 3 -> !playerOneName.isBlank() && !playerTwoName.isBlank() && !playerThreeName.isBlank();
+            case 4 -> !playerOneName.isBlank() && !playerTwoName.isBlank() && !playerThreeName.isBlank() && !playerFourName.isBlank();
+            default -> !playerOneName.isBlank() && !playerTwoName.isBlank();
+        };
+    }
+
+    public boolean uniquePlayerNames(String playerOneName, String playerTwoName, String playerThreeName, String playerFourName) {
+        return switch (numOfPlayers) {
+            case 3 ->
+                    !playerOneName.equals(playerTwoName) && !playerOneName.equals(playerThreeName) && !playerTwoName.equals(playerThreeName);
+            case 4 ->
+                    !playerOneName.equals(playerTwoName) && !playerOneName.equals(playerThreeName) && !playerOneName.equals(playerFourName) &&
+                            !playerTwoName.equals(playerThreeName) && !playerTwoName.equals(playerFourName) &&
+                            !playerThreeName.equals(playerFourName);
+            default -> !playerOneName.equals(playerTwoName);
+        };
     }
 
     public void createStartWindow() {

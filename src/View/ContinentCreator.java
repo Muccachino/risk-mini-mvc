@@ -68,10 +68,10 @@ public class ContinentCreator {
             CountryView cView = new CountryView(controller, newCountry);
 
             Color countryColor = switch (newCountry.getContinent()) {
-                case "A" -> new Color(249,225,68);
-                case "B" -> new Color(241,115,115);
-                case "C" -> new Color(99,189,89);
-                case "D" -> new Color(67,80,156);
+                case "A" -> allContinentColors[0];
+                case "B" -> allContinentColors[1];
+                case "C" -> allContinentColors[2];
+                case "D" -> allContinentColors[3];
                 default -> new Color(0,0,0);
             };
 
