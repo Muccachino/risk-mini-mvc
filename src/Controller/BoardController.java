@@ -23,7 +23,7 @@ public class BoardController {
     Map<String, CountryView> allCountryViews = new HashMap<>();
     Map<String, String[]> countryNeighbors = new HashMap<>();
 
-    private final String boardChoice;
+    public final String boardChoice;
     public final int numOfPlayers;
     public final boolean missionsEnabled;
     private Player playerOne;
@@ -36,10 +36,10 @@ public class BoardController {
     public Player[] allPlayers;
 
     public FightController fightController;
-    private SendArmyController sendArmyController;
+    public SendArmyController sendArmyController;
     public CardWindowController cardWindowController;
 
-
+    // TODO: clean up commented code
     public BoardController(String boardChoice, int numOfPlayers, String playerOneName, String playerTwoName, String playerThreeName, String playerFourName,
                            Color playerOneColor, Color playerTwoColor, Color playerThreeColor, Color playerFourColor, boolean missionsEnabled) {
         this.boardChoice = boardChoice;
@@ -125,6 +125,7 @@ public class BoardController {
             case "board1" -> NeighborRelations.addCountryNeighbors1(countryNeighbors);
             case "board2" -> NeighborRelations.addCountryNeighbors2(countryNeighbors);
             case "board3" -> NeighborRelations.addCountryNeighbors3(countryNeighbors);
+            case "board4" -> NeighborRelations.addCountryNeighbors4(countryNeighbors);
         }
     }
 
@@ -363,7 +364,28 @@ public class BoardController {
         }
     }
 
+    // Resets chosen countries and changes their color back to their owners color.
+    public void resetAttackerDefenderSenderReceiver() {
+        if(fightController.getAttackingCountry() != null) {
+            allCountryViews.get(fightController.getAttackingCountry().getName()).setBackgroundColor(fightController.getAttackingCountry().getOwner().getPlayerColor());
+            fightController.setAttackingCountry(null);
+        }
+        if(fightController.getDefendingCountry() != null) {
+            allCountryViews.get(fightController.getDefendingCountry().getName()).setBackgroundColor(fightController.getDefendingCountry().getOwner().getPlayerColor());
+            fightController.setDefendingCountry(null);
+        }
+        if(sendArmyController.getSendingCountry() != null) {
+            allCountryViews.get(sendArmyController.getSendingCountry().getName()).setBackgroundColor(sendArmyController.getSendingCountry().getOwner().getPlayerColor());
+            sendArmyController.setSendingCountry(null);
+        }
+        if(sendArmyController.getReceivingCountry() != null) {
+            allCountryViews.get(sendArmyController.getReceivingCountry().getName()).setBackgroundColor(sendArmyController.getReceivingCountry().getOwner().getPlayerColor());
+            sendArmyController.setReceivingCountry(null);
+        }
+    }
+
     public void endPhase() {
+        resetAttackerDefenderSenderReceiver();
         if(getPhase().equals("Attack Phase")) {
             setPhase("Fortification Phase");
             boardView.setCurrentPhaseLabel("Fortifications: " + this.sendArmyController.getFortifications() + " Left");

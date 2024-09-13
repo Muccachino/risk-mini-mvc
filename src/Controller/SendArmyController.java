@@ -62,15 +62,20 @@ public class SendArmyController {
         sendingCountry.removeSoldiersInside(sendingCountry.getSoldiersSend());
         sendingCountry.resetSoldiersSend();
 
-        sendingCountryView.updateCountryPanel();
-        receivingCountryView.updateCountryPanel();
+        if (boardController.getPhase().equals("Fortification Phase")){
+            sendingCountryView.updateCountryPanel();
+            receivingCountryView.updateCountryPanel();
 
-        // After the set amount of fortifications, the players turn end automatically
-        fortifications--;
-        if(fortifications == 0) {
-            boardController.endTurn();
-        } else {
-            boardView.setCurrentPhaseLabel("Fortifications: " + fortifications + " Left");
+            // After the set amount of fortifications, the players turn end automatically
+            fortifications--;
+            if(fortifications == 0) {
+                boardController.endTurn();
+            } else {
+                boardView.setCurrentPhaseLabel("Fortifications: " + fortifications + " Left");
+            }
+        }
+        else {
+            boardController.fightController.updatePanels();
         }
         sendingCountry = null;
         receivingCountry = null;

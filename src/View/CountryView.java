@@ -1,5 +1,6 @@
 package View;
 
+import Config.CountryNames;
 import Controller.BoardController;
 import Model.Country;
 import Config.Helper;
@@ -94,13 +95,8 @@ public class CountryView implements MouseListener {
         if(on) {
             countryPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN, 4));
         } else {
-            switch (country.getContinent()) {
-                case "A" -> countryPanel.setBorder(BorderFactory.createLineBorder(new Color(249,225,68), 3));
-                case "B" -> countryPanel.setBorder(BorderFactory.createLineBorder(new Color(241,115,115),3));
-                case "C" -> countryPanel.setBorder(BorderFactory.createLineBorder(new Color(99,189,89),3));
-                case "D" -> countryPanel.setBorder(BorderFactory.createLineBorder(new Color(67,80,156),3));
-                default -> countryPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            }
+            String correctContinent = CountryNames.getCorrectContinent(country.getName(), boardController.boardChoice);
+            countryPanel.setBorder(BorderFactory.createLineBorder(ContinentCreator.setCountryColor(correctContinent), 3));
         }
     }
 

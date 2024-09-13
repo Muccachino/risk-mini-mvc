@@ -123,18 +123,6 @@ public class FightController {
 
     // Updates the state of the countries after an attack
     public void updatePanels() {
-        // Check if an attack was successful
-        if (defendingCountry.getSoldiersInside() == 0) {
-            defendingCountry.setOwner(attackingCountry.getOwner());
-            defendingCountry.addSoldiersInside(attackingCountry.getSoldiersInside() - 1);
-            attackingCountry.setSoldiersInside(1);
-            //TODO: Add different Cards
-            boardController.getCurrentPlayer().addCards();
-            boardView.setPlayerOneCardsButtonText(boardController.getPlayerOne().getName() + " Cards: " + boardController.getPlayerOne().getAllCardsSize());
-            boardView.setPlayerTwoCardsButtonText(boardController.getPlayerTwo().getName() + " Cards: " + boardController.getPlayerTwo().getAllCardsSize());
-            boardView.setPlayerThreeCardsButtonText(boardController.getPlayerThree().getName() + " Cards: " + boardController.getPlayerThree().getAllCardsSize());
-            boardView.setPlayerFourCardsButtonText(boardController.getPlayerFour().getName() + " Cards: " + boardController.getPlayerFour().getAllCardsSize());
-        }
 
         // Colors of countries will be set to their owners color
         attackingCountryView.updateCountryPanel();
@@ -146,5 +134,18 @@ public class FightController {
 
         attackingCountry = null;
         defendingCountry = null;
+    }
+
+    public void openSendArmyAfterConquering() {
+        defendingCountry.setOwner(attackingCountry.getOwner());
+        boardController.getCurrentPlayer().addCards();
+        boardView.setPlayerOneCardsButtonText(boardController.getPlayerOne().getName() + " Cards: " + boardController.getPlayerOne().getAllCardsSize());
+        boardView.setPlayerTwoCardsButtonText(boardController.getPlayerTwo().getName() + " Cards: " + boardController.getPlayerTwo().getAllCardsSize());
+        boardView.setPlayerThreeCardsButtonText(boardController.getPlayerThree().getName() + " Cards: " + boardController.getPlayerThree().getAllCardsSize());
+        boardView.setPlayerFourCardsButtonText(boardController.getPlayerFour().getName() + " Cards: " + boardController.getPlayerFour().getAllCardsSize());
+
+        boardController.sendArmyController.setSendingCountry(attackingCountry);
+        boardController.sendArmyController.setReceivingCountry(defendingCountry);
+        boardController.sendArmyController.createSendArmyView();
     }
 }

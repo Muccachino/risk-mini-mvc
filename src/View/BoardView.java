@@ -13,8 +13,8 @@ import java.util.Map;
 public class BoardView extends JFrame implements ActionListener {
     public static final int DICE_ROW_HEIGHT = 50;
     public static final int ROW_WIDTH_OUTSIDE = 250;
-    public static final int ROW_WIDTH_INSIDE = 700;
-    public static final int FIELD_WIDTH = 1200;
+    public static final int ROW_WIDTH_INSIDE = 800;
+    public static final int FIELD_WIDTH = 1300;
     public static final int FIELD_HEIGHT = 800;
     public static final int STAT_ROW_HEIGHT = 50;
 
@@ -86,6 +86,7 @@ public class BoardView extends JFrame implements ActionListener {
             }
             case "board2" -> allContinents = continentCreator.createBoard2(this.allCountries, this.allCountryViews);
             case "board3" -> allContinents = continentCreator.createBoard3(this.allCountries, this.allCountryViews);
+            case "board4" -> allContinents = continentCreator.createBoard4(this.allCountries, this.allCountryViews);
         }
         allContinents.setBackground(new Color(153,204,255));
 
@@ -145,7 +146,6 @@ public class BoardView extends JFrame implements ActionListener {
 
         pack();
         setLocationRelativeTo(null);
-        System.out.println(boardController.getCurrentPlayer().getAllCardsSize());
     }
 
     public void setPlayerTurnLabel(String text) {

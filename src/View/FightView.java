@@ -176,7 +176,11 @@ public class FightView implements ActionListener {
         }
 
         if (e.getActionCommand().equals("exit_fight")) {
-            controller.updatePanels();
+            if(controller.getDefendingCountry().getSoldiersInside() == 0) {
+                controller.openSendArmyAfterConquering();
+            }else {
+                controller.updatePanels();
+            }
             frame.dispose();
         }
     }
