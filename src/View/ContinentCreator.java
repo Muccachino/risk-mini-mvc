@@ -18,8 +18,6 @@ public class ContinentCreator {
     GridBagConstraints continentConstraints = new GridBagConstraints();
     JPanel continentPanel = new JPanel(continentLayout);
 
-    //TODO: Change Creator to use different country and continent names
-
     public static Color[] allContinentColors = new Color[] {
             new Color(249,225,68),
             new Color(241,115,115),

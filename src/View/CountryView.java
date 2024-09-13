@@ -4,7 +4,6 @@ import Config.CountryNames;
 import Controller.BoardController;
 import Model.Country;
 import Config.Helper;
-import Model.Player;
 
 import javax.swing.*;
 import java.awt.*;

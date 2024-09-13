@@ -74,37 +74,4 @@ public class CardWindowController {
             boardView.setPlayerFourCardsButtonText(currentPlayer.getName() + " Cards: " + currentPlayer.getAllCardsSize());
         }
     }
-
-/*    // Start the extra phase for each player after they clicked their card button with 3 or more cards
-    public void playerOneSetCardsPhase() {
-        this.playerOne.cardsToSoldiers();
-        boardView.setPlayerOneCardsButtonText(this.playerOne.getName() + " Cards: " + this.playerOne.getAllCardsSize());
-        lastPhase = getPhase();
-        setPhase(this.playerOne.getName() + ": Set Soldiers");
-        boardView.setCurrentPhaseLabel(this.playerOne.getName() + ": Set " + this.playerOne.getSoldiers() + " Soldier(s)");
-    }
-
-    public void playerTwoSetCardsPhase() {
-        this.playerTwo.cardsToSoldiers();
-        boardView.setPlayerTwoCardsButtonText(this.playerTwo.getName() + " Cards: " + this.playerTwo.getAllCardsSize());
-        lastPhase = getPhase();
-        setPhase(this.playerTwo.getName() + ": Set Soldiers");
-        boardView.setCurrentPhaseLabel(this.playerTwo.getName() + ": Set " + this.playerTwo.getSoldiers() + " Soldier(s)");
-    }
-
-    public void playerThreeSetCardsPhase() {
-        this.playerThree.cardsToSoldiers();
-        boardView.setPlayerThreeCardsButtonText(this.playerThree.getName() + " Cards: " + this.playerThree.getAllCardsSize());
-        lastPhase = getPhase();
-        setPhase(this.playerThree.getName() + ": Set Soldiers");
-        boardView.setCurrentPhaseLabel(this.playerThree.getName() + ": Set " + this.playerThree.getSoldiers() + " Soldier(s)");
-    }
-
-    public void playerFourSetCardsPhase() {
-        this.playerFour.cardsToSoldiers();
-        boardView.setPlayerFourCardsButtonText(this.playerFour.getName() + " Cards: " + this.playerFour.getAllCardsSize());
-        lastPhase = getPhase();
-        setPhase(this.playerFour.getName() + ": Set Soldiers");
-        boardView.setCurrentPhaseLabel(this.playerFour.getName() + ": Set " + this.playerFour.getSoldiers() + " Soldier(s)");
-    }*/
 }

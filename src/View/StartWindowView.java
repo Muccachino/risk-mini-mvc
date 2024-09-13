@@ -245,15 +245,6 @@ public class StartWindowView implements ActionListener {
         return button;
     }
 
-    public void addButtonColors() {
-        JButton[] allColorButtons = new JButton[] {
-                playerOneColorButton1, playerOneColorButton2, playerOneColorButton3,
-                playerTwoColorButton1, playerTwoColorButton2, playerTwoColorButton3,
-                playerThreeColorButton1, playerThreeColorButton2, playerThreeColorButton3,
-                playerFourColorButton1, playerFourColorButton2, playerFourColorButton3};
-
-
-    }
 
     // Highlights the first Button in given Array
     public void highlightButton(JButton activeButton, JButton[] notActiveButtons) {
