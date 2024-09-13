@@ -66,6 +66,9 @@ public class CountryView implements MouseListener {
         if(country.getOwner() == boardController.getPlayerFour()) {
             setBackgroundColor(boardController.getPlayerFour().getPlayerColor());
         }
+        if(country.getOwner() == null) {
+            setBackgroundColor(null);
+        }
 
         setSoldierIcons(country.getSoldiersInside());
     }

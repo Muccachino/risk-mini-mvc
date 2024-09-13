@@ -59,12 +59,16 @@ public class FightController {
     }
 
     public void createFightView() {
+        if(defendingCountry.getSoldiersInside() == 0) {
+            defendingCountry.setSoldiersInside(1);
+            setDefendingSoldiers(1);
+        }
         new FightView(boardView, this).createFightWindow();
     }
 
 
     public boolean checkEnoughAttackers(int attackers) {
-        return (attackingCountry.getSoldiersInside() - attackers) >= 1;
+        return (attackingCountry.getSoldiersInside() - attackers) >= 0;
     }
 
     public boolean checkEnoughDefenders(int defenders) {
@@ -86,7 +90,11 @@ public class FightController {
 
         Integer[] d_dice = new Integer[defendingSoldiers];
         for (int i = 0; i < defendingSoldiers; i++) {
-            d_dice[i] = rollDice();
+            if(defendingCountry.getOwner() == null){
+                d_dice[i] = (int)(Math.random() * 2) + 1;
+            } else {
+                d_dice[i] = rollDice();
+            }
         }
         Arrays.sort(d_dice, Collections.reverseOrder());
         view.setDefenderDiceLabel("Defender Roll: " + Helper.setLabelContent(d_dice));
@@ -98,7 +106,8 @@ public class FightController {
     public void resolveDiceRolls(Integer[] attackerDices, Integer[] defenderDices, FightView view) {
         int attackerLosses = 0;
         int defenderLosses = 0;
-        for (int i = 0; i < defenderDices.length; i++) {
+        int minDicesLength = Math.min(attackerDices.length, defenderDices.length);
+        for (int i = 0; i < minDicesLength; i++) {
             if(attackerDices[i] > defenderDices[i]){
                 defenderLosses++;
             } else {
@@ -123,7 +132,9 @@ public class FightController {
 
     // Updates the state of the countries after an attack
     public void updatePanels() {
-
+        if(attackingCountry.getSoldiersInside() == 0) {
+            attackingCountry.setOwner(null);
+        }
         // Colors of countries will be set to their owners color
         attackingCountryView.updateCountryPanel();
         defendingCountryView.updateCountryPanel();

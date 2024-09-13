@@ -39,7 +39,7 @@ public class BoardController {
     public SendArmyController sendArmyController;
     public CardWindowController cardWindowController;
 
-    // TODO: clean up commented code
+    // TODO: enable neutral territories;
     public BoardController(String boardChoice, int numOfPlayers, String playerOneName, String playerTwoName, String playerThreeName, String playerFourName,
                            Color playerOneColor, Color playerTwoColor, Color playerThreeColor, Color playerFourColor, boolean missionsEnabled) {
         this.boardChoice = boardChoice;
@@ -186,7 +186,7 @@ public class BoardController {
 
     // Setting or Unsetting an attacking and defending country for the Attack Phase
     public void attackPhase(Country country, CountryView view) {
-        if(this.fightController.getAttackingCountry() == null && country.getOwner() == this.currentPlayer && country.getSoldiersInside() > 1) {
+        if(this.fightController.getAttackingCountry() == null && country.getOwner() == this.currentPlayer) {
             this.fightController.setAttackingCountry(country);
             this.fightController.setAttackingCountryView(view);
             view.setBackgroundColor(Color.CYAN);
@@ -204,7 +204,11 @@ public class BoardController {
             view.setBackgroundColor(Color.RED);
             boardView.attackButton.setEnabled(true);
         } else if (this.fightController.getDefendingCountry() != null && this.fightController.getDefendingCountry().getName().equals(country.getName())) {
-            view.setBackgroundColor(this.fightController.defendingCountry.getOwner().getPlayerColor());
+            if(this.fightController.defendingCountry.getOwner() != null) {
+                view.setBackgroundColor(this.fightController.defendingCountry.getOwner().getPlayerColor());
+            } else  {
+                view.setBackgroundColor(null);
+            }
             this.fightController.setDefendingCountry(null);
             this.fightController.setDefendingCountryView(null);
             boardView.attackButton.setEnabled(false);

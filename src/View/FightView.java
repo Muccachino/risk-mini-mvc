@@ -70,17 +70,26 @@ public class FightView implements ActionListener {
         JPanel defendingPanel = new JPanel(new GridLayout(4,1));
         defendingPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         JLabel d_countryName = new JLabel("Country: " + controller.getDefendingCountry().getName(), JLabel.CENTER);
-        d_soldiers = new JLabel("Soldiers in Country: " + controller.getDefendingCountry().getSoldiersInside(), JLabel.CENTER);
-        d_defenders = new JLabel("Defenders: 0", JLabel.CENTER);
+        if(controller.getDefendingCountry().getOwner() == null){
+            d_soldiers = new JLabel("Soldiers in Country: Neutral Army (1)", JLabel.CENTER);
+            d_defenders = new JLabel("Defenders: Neutral Army", JLabel.CENTER);
+        }else {
+            d_soldiers = new JLabel("Soldiers in Country: " + controller.getDefendingCountry().getSoldiersInside(), JLabel.CENTER);
+            d_defenders = new JLabel("Defenders: 0", JLabel.CENTER);
+        }
+
         JPanel d_buttons = new JPanel();
-        JButton d_one = new JButton("One");
-        d_one.addActionListener(this);
-        d_one.setActionCommand("d_one");
-        JButton d_two = new JButton("Two");
-        d_two.addActionListener(this);
-        d_two.setActionCommand("d_two");
-        d_buttons.add(d_one);
-        d_buttons.add(d_two);
+        if(controller.getDefendingCountry().getOwner() != null){
+            JButton d_one = new JButton("One");
+            d_one.addActionListener(this);
+            d_one.setActionCommand("d_one");
+            JButton d_two = new JButton("Two");
+            d_two.addActionListener(this);
+            d_two.setActionCommand("d_two");
+            d_buttons.add(d_one);
+            d_buttons.add(d_two);
+        }
+
         defendingPanel.add(d_countryName);
         defendingPanel.add(d_soldiers);
         defendingPanel.add(d_defenders);
@@ -169,6 +178,10 @@ public class FightView implements ActionListener {
         if(e.getActionCommand().equals("d_two") && controller.checkEnoughDefenders(2)) {
             controller.setDefendingSoldiers(2);
             setDefendersLabel("Defenders: " + controller.getDefendingSoldiers());
+        }
+        if(e.getActionCommand().equals("neutral")) {
+            controller.setDefendingSoldiers(1);
+            setDefendersLabel("Defenders: Neutral Army (1)");
         }
 
         if(e.getActionCommand().equals("roll_dice") && (controller.getAttackingSoldiers() != 0 && controller.getDefendingSoldiers() != 0)) {

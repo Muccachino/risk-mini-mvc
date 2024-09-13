@@ -61,6 +61,10 @@ public class SendArmyController {
         receivingCountry.addSoldiersInside(sendingCountry.getSoldiersSend());
         sendingCountry.removeSoldiersInside(sendingCountry.getSoldiersSend());
         sendingCountry.resetSoldiersSend();
+        // Remove owner if country is abandoned
+        if(sendingCountry.getSoldiersInside() == 0) {
+            sendingCountry.setOwner(null);
+        }
 
         if (boardController.getPhase().equals("Fortification Phase")){
             sendingCountryView.updateCountryPanel();

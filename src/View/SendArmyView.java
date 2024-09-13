@@ -41,7 +41,7 @@ public class SendArmyView implements ActionListener {
         JLabel question = new JLabel("How many soldiers do you want to send from " + controller.getSendingCountry().getName() + " to " + controller.getReceivingCountry().getName() + " ?");
 
         JPanel soldiersPanel = new JPanel(new FlowLayout());
-        soldiersSend = new JSpinner(new SpinnerNumberModel(1, 1, controller.getSendingCountry().getSoldiersInside() - 1, 1));
+        soldiersSend = new JSpinner(new SpinnerNumberModel(1, 1, controller.getSendingCountry().getSoldiersInside(), 1));
         soldiersSend.setSize(100, 100);
         soldiersPanel.add(soldiersSend);
 
